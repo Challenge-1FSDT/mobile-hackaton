@@ -5,7 +5,12 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
+import React, { useState } from 'react';
+import { View, Button, Text } from 'react-native';
+import * as Location from 'expo-location';
+
 export default function HomeScreen() {
+  /*
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -70,5 +75,35 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
-  },
-});
+  },*/
+
+  const [location, setLocation] = useState<null | Location.LocationObject>(null);
+
+  const getLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permissão negada para acessar a localização!');
+      return;
+    }
+
+    const currentLocation = await Location.getCurrentPositionAsync({});
+    setLocation(currentLocation);
+    console.log(currentLocation);
+    console.log(location?.coords);
+
+
+  };
+
+  return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Button title="Obter Localização" onPress={getLocation} />
+        {location ? (
+          <Text style={{ color: 'white' }}>
+            Latitude: {location.coords.latitude}, Longitude: {location.coords.longitude}
+          </Text>
+        ) : (
+          <Text>Localização não disponível</Text>
+        )}
+      </View>
+  );
+}
