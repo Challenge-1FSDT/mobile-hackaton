@@ -66,7 +66,7 @@ export default function App(){
 
                 {/* Email Input */}
                 <View style={styles.inputGroup}>
-                  <Text style={styles.label}>username</Text>
+                  <Text style={styles.label}>Login</Text>
                   <TextInput
                     style={styles.input}
                     placeholder="your@email.com"
@@ -79,7 +79,7 @@ export default function App(){
 
                 {/* Password Input */}
                 <View style={styles.inputGroup}>
-                  <Text style={styles.label}>password</Text>
+                  <Text style={styles.label}>Senha</Text>
                   <TextInput
                     style={styles.input}
                     placeholder="********"

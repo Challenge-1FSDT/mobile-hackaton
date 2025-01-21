@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   navContent: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#2A2379",
     borderBottomLeftRadius: 16,
