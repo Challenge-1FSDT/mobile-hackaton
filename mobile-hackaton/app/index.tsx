@@ -32,7 +32,7 @@ export default function App(){
       console.log(userData);
       console.log('----------');
 
-      router.replace('/');
+      router.push('/logado/Aulas');
 
     } catch (error) {
       if (error instanceof Error) {

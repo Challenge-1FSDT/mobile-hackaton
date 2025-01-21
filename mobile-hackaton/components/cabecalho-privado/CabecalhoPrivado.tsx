@@ -8,7 +8,7 @@ export default function CabecalhoPrivado() {
       <View style={styles.navbar}>
         <View style={styles.navContent}>
           {/* Logo */}
-           <Link href="/">
+           <Link href="/logado/Aulas">
             <Text style={styles.logo}>
               LEARN<Text style={styles.highlight}>ON</Text>
             </Text>
