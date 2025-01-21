@@ -4,7 +4,6 @@ import { Text, View, StyleSheet } from 'react-native';
 
 export default function Checkout(){
 
-  //const [timeLeft, setTimeLeft] = useState(60); // Tempo inicial em segundos
   const [timeLeft, setTimeLeft] = useState(45 * 60); // 45 minutos em segundos
 
   useEffect(() => {
