@@ -28,7 +28,8 @@ export default function Checkout(){
   return (
     <View style={{backgroundColor: 'black', height: '100%'}}>
       <CabecalhoPrivado></CabecalhoPrivado>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.conteudo}>
+        <Text style={styles.titulo}>Foco total</Text>
         <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
       </View>
     </View>
@@ -36,6 +37,11 @@ export default function Checkout(){
 };
 
 const styles = StyleSheet.create({
+  conteudo:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center' 
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -46,5 +52,12 @@ const styles = StyleSheet.create({
     fontSize: 100,
     fontWeight: 'bold',
     color: 'white',
+  },
+  titulo: {
+    color: 'white',
+    position: 'absolute', // Torna o texto posicionado de forma absoluta na tela
+    top: 10, // Distância do topo
+    left: 10, // Distância do lado esquerdo
+    fontSize: 20, // Ajuste o tamanho do texto, se necessário
   },
 });
