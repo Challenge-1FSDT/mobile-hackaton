@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text,  StyleSheet} from 'react-native';
 import { Link } from "expo-router";
 
-export default function Cabecalho() {  
+export default function CabecalhoPrivado() {  
 
     return (
       <View style={styles.navbar}>
