@@ -1,5 +1,6 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
 import PostCard from '@/components/card/Card';
+import Lista from '@/components/lista/Lista';
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 
@@ -9,21 +10,24 @@ export default function Aulas(){
     <>
       <CabecalhoPrivado></CabecalhoPrivado>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ScrollView style={{width: '100%'}}>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-          <PostCard></PostCard>
-        </ScrollView>
+        <Lista>
+        </Lista>
       </View>
     </>
   );
 };
+
+/*
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+<PostCard></PostCard>
+*/
