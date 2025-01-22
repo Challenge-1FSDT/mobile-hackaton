@@ -23,6 +23,7 @@ export default function Checkout(){
     const seconds = time % 60;
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
+  
 
   return (
     <View style={{backgroundColor: 'black', height: '100%'}}>
