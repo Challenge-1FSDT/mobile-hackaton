@@ -1,10 +1,13 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
+import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 
 export default function Checkout(){
 
-  const [timeLeft, setTimeLeft] = useState(45 * 60); // 45 minutos em segundos
+  const [timeLeft, setTimeLeft] = useState(1); // 45 minutos em segundos
+  const [isTimeUp, setIsTimeUp] = useState(false); // Estado para controlar a visibilidade do botão
+
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -13,6 +16,8 @@ export default function Checkout(){
       }, 1000);
 
       return () => clearInterval(timer); // Limpa o intervalo ao desmontar ou atualizar
+    } else {
+      setIsTimeUp(true); // Quando o tempo chega a 0, o botão será exibido
     }
   }, [timeLeft]);
 
@@ -23,16 +28,30 @@ export default function Checkout(){
     const seconds = time % 60;
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
+
+  const handleButtonPress = () => {
+    router.push('/logado/Aulas');
+    // Adicione aqui a lógica para o que deve acontecer ao clicar no botão
+  };
   
 
   return (
-    <View style={{backgroundColor: 'black', height: '100%'}}>
-      <CabecalhoPrivado></CabecalhoPrivado>
-      <View style={styles.conteudo}>
+   <View style={{backgroundColor: 'black', height: '100%'}}>
+    <View style={styles.conteudo}>
+      
+      {!isTimeUp && (
         <Text style={styles.titulo}>Foco total</Text>
-        <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
-      </View>
+      )}
+
+      <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
+      
+      {/* Condicional para exibir o botão apenas quando o tempo for zero */}
+      {isTimeUp && (
+        <Button title="Finalizar" onPress={handleButtonPress} color="green" />
+      )}
+
     </View>
+  </View>
   );
 };
 

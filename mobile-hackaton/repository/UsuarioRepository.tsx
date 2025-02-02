@@ -1,33 +1,25 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Usuario, UsuarioForm } from '../types/Usuario';
+import axios from './../node_modules/axios/index';
+import { ENDPOINTS } from '@/constants/Endpoints';
 
 export async function getUsuario(id: string): Promise<Usuario | undefined> {
 
+  const token = await AsyncStorage.getItem('token');
+  
   try {
-      const token = await AsyncStorage.getItem('token');
-      const res = await fetch(`https://api.capoteimeu.uno/users/${id}`,
-          {
-            method: 'GET',
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`, // Usa o token no cabeçalho
-            },
-          }
-      );
+    
+      const response = await axios.get(`${ENDPOINTS.LOGIN}`);
 
-      console.log('(status): '+ res.status);
-      console.log('(Header): '+res.headers);
-      console.log('(Body): '+res.body);
+      return response.data; // Retorna os dados da resposta
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch data');
-      }
-
-      return res.json();
-
-  } catch (error) {
-    console.error("Erro ao buscar alunos:", error); 
+  } catch (error: any) {
+      console.error("Erro ao buscar escolas:", error.response?.data || error.message);
+      throw new Error(error.response?.data?.message || error.message);
   }
+
+
+
 }
 
 

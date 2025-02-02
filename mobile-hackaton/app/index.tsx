@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, TextInput,StyleSheet, TouchableOpacity, View } from 'react-native';
 import { router } from "expo-router";
 
-export default function App(){
+export default function Index(){
 
   const [userType, setUserType] = useState<"user" | "admin">("user");
   
@@ -12,17 +12,33 @@ export default function App(){
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  //------------------------------
+
+  //Formulário de login
+  const [formLogin, setFormLogin] = useState({
+    email: "",
+    senha: "",
+  });
+
+  // Função para lidar com mudanças nos campos de formulário
+  const handleInputChange = (name: string, value: string) => {
+    setFormLogin((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+  };
+  
+  //-----------------------------
 
   const handleLogin = async () => {
-    console.log({ userType, email, password });
+
+    console.log('-------------------------');
+    console.log('' + formLogin.email +' - ' +formLogin.senha + '');
+    console.log('-------------------------');
 
     try {
-      //await login(email, password);
+
       const teste = AsyncStorage.getItem("token");
-
-      console.log('Resposta de Login: '+teste);
-
-      //await AsyncStorage.setItem('user', JSON.stringify(await getUserInfo()));
 
       let userData = await AsyncStorage.getItem('user');
 
@@ -70,8 +86,8 @@ export default function App(){
                   <TextInput
                     style={styles.input}
                     placeholder="your@email.com"
-                    value={email}
-                    onChangeText={(text) => setEmail(text)}
+                    value={formLogin.email}
+                    onChangeText={(text) => handleInputChange("email", text)}
                     keyboardType="email-address"
                     autoCapitalize="none"
                   />
@@ -83,8 +99,8 @@ export default function App(){
                   <TextInput
                     style={styles.input}
                     placeholder="********"
-                    value={password}
-                    onChangeText={(text) => setPassword(text)}
+                    value={formLogin.senha}
+                    onChangeText={(text) => handleInputChange("email", text)}
                     secureTextEntry
                   />
                 </View>
