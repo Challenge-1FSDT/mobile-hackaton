@@ -3,13 +3,13 @@ import { Usuario, UsuarioForm } from '../types/Usuario';
 import axios from './../node_modules/axios/index';
 import { ENDPOINTS } from '@/constants/Endpoints';
 
-export async function getUsuario(id: string): Promise<Usuario | undefined> {
+export async function getLogin(email : string, senha: string): Promise<Usuario | undefined> {
 
-  const token = await AsyncStorage.getItem('token');
-  
   try {
     
-      const response = await axios.get(`${ENDPOINTS.LOGIN}`);
+      const response = await axios.post(`${ENDPOINTS.LOGIN}`, {email, senha});
+      console.log('Tentativa de login');
+      console.log('response >> '+JSON.stringify(response));
 
       return response.data; // Retorna os dados da resposta
 

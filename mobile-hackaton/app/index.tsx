@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, TextInput,StyleSheet, TouchableOpacity, View } from 'react-native';
 import { router } from "expo-router";
+import { getLogin } from '@/repository/UsuarioRepository';
 
 export default function Index(){
 
-  const [userType, setUserType] = useState<"user" | "admin">("user");
+  //const [userType, setUserType] = useState<"user" | "admin">("user");
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,6 +46,9 @@ export default function Index(){
       console.log('--------------------------------------------------');
       console.log('----------');
       console.log('teste do local');
+
+      getLogin(formLogin.email, formLogin.senha);
+
       console.log(userData);
       console.log('----------');
 
@@ -100,7 +104,7 @@ export default function Index(){
                     style={styles.input}
                     placeholder="********"
                     value={formLogin.senha}
-                    onChangeText={(text) => handleInputChange("email", text)}
+                    onChangeText={(text) => handleInputChange("senha", text)}
                     secureTextEntry
                   />
                 </View>

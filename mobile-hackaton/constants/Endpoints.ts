@@ -1,5 +1,5 @@
 // Base URL da API
-export const BASE_URL = 'https://e9f31d7cd532.ngrok.app/';
+export const BASE_URL = 'https://0c3757889129.ngrok.app/';
 
 // Endpoints específicos
 export const ENDPOINTS = {
