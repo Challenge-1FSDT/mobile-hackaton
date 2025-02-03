@@ -9,7 +9,7 @@ interface IToken{
 
 const AuthContext = createContext<IToken | null>(null);
 
-export default function AuthProvider({children}: Readonly<{children: ReactNode}>) : JSX.Element{
+export default function AuthProvider({children}:any) : JSX.Element{
   const [token, setToken] = useState<string>("");
   const [refreshToken, setRefreshToken] = useState<string>("");
 

@@ -5,6 +5,7 @@ import { Text, TextInput,StyleSheet, TouchableOpacity, View } from 'react-native
 import { router } from "expo-router";
 import { getLogin } from '@/repository/UsuarioRepository';
 import { Ionicons } from '@expo/vector-icons'; 
+import { useAuth } from '@/provider/AuthContext';
 
 export default function Index(){
 
@@ -12,6 +13,8 @@ export default function Index(){
   
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  let {token, setToken} = useAuth();
 
   //------------------------------
 
@@ -45,9 +48,16 @@ export default function Index(){
 
       const response = await getLogin(formLogin.email, formLogin.password);
 
+      console.log('--------------------------------------------------');
+      console.log('SENHOR DOS ANEIS');
       console.log(userData);
       console.log(response);
+      setToken(response?.data?.accessToken);
 
+      console.log("Token antes de ser atualizado: ", token); // Isso ainda vai ser o antigo valor do token
+
+  
+      console.log('--------------------------------------------------');
       console.log('----------');
 
       router.push('/Escolas');

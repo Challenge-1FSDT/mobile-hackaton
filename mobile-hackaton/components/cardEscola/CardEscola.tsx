@@ -26,8 +26,6 @@ export default function CardEscola({name,
                                     updatedAt
                                   }: CardEscolaProps) {  
 
-    const linkTo = useLinkTo();
-
     function escolaEscolhida(){
         //Alert.alert('teste', 'teste');
         router.push('/logado/Aulas');

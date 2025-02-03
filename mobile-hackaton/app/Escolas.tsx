@@ -7,15 +7,17 @@ import { getLogin } from '@/repository/UsuarioRepository';
 import { Ionicons } from '@expo/vector-icons'; 
 import CardEscola from '@/components/cardEscola/CardEscola';
 import { listarEscola } from '@/repository/EscolaRepository';
+import { useAuth } from '@/provider/AuthContext';
 
 export default function ListaEscola() {
   const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
-
+  const {token} = useAuth();
   // Função para chamar listarEscola e atualizar o estado
   const fetchEscolas = async () => {
+    
     try {
-      const response = await listarEscola(); // Chama a função que retorna as escolas
+      const response = await listarEscola(token); // Chama a função que retorna as escolas
 
       console.log('>>> ListaEscola.ListaEscola >>>' + JSON.stringify(response.data));
 
@@ -25,9 +27,12 @@ export default function ListaEscola() {
     } finally {
       setLoading(false); // Define loading como false após a requisição
     }
+
+   
   };
 
   useEffect(() => {
+
     fetchEscolas(); // Chama a função quando o componente for montado
   }, []);
 
