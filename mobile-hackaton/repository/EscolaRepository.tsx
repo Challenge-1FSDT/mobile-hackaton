@@ -7,7 +7,7 @@ export const listarEscola = async () => {
     console.log('>>> ENDPOINTS.GET_LISTAR_ESCOLAS >>>', url);
 
     // Este token é de teste e precisa ser trocado diariamente
-    let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdW5vQGZpYXAuY29tIiwic3ViIjozLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczODQ2MjgzOSwiZXhwIjoxNzM4NTQ5MjM5fQ.S_Nrlp7XB71_mD8HR_i7kyNzuvl_z57R2wqK6wqecfu1CLlg95tPbYvUSTUHvcsjAK1QentR5SnQgDbORGboJh_1GrDhyX8RPKPQmZ9LDT34cIWpZU-l50ssqwFJuiv3xfuxnrm_PBzNVKT0VVaj1f1ZBkgh7b1a3xhbTswKmlIzawFElum35_rxuM344MF3QGZephhJkUvH2T0lH-GTA0R5wfnGrPd9Og67uF_BzP0VEi6xhwPnyG8CpgSFFa6Q0sNWtN8vsZD0-xgqZ10Hf2dOcqRO46SjihCdFjm9ZcoKHfkRfno1ySTJk4o7Vk3TOMPYa8cU7NPnK8Ks8LKXhA';
+    let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdW5vQGZpYXAuY29tIiwic3ViIjozLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczODU1MDA4NSwiZXhwIjoxNzM4NjM2NDg1fQ.jhbQRSanUMEWp6TQpzFLTRxOLz-jrklKgfVbcSqS0hcQT3twgnPM2Sl0pHYv11TDLDLpxXz1oKfPOr5q7zwz9MtzIXmTLEIn58CFuL5hTG1-GufyQ_FANHEcf2-8CyNGPk59KICAjxdIs0sAa5uPA9PCOaeXnFyD3jCWPucbdxfbUI-QmB69dCTtvvKmDP5Eoh-PT4dg-SSnL6uD6C75HVRvqg65J3gV6JzbbPthexepKDc0ZES6L8FpRa7sBV2qwkEu8AqSPj3a-47uFIm_jRg9QhBVmCQ75KSxUX_W7EGdw2_Kl0nwpoJZ38E1khqCbrib_HwXLjR3wFuwCwsp7Q';
 
     try {
         const response = await axios.get(url, {

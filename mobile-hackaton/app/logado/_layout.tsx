@@ -16,7 +16,7 @@ export default function RootLayout(){
         tabBarInactiveTintColor: "#A9A9A9", // Cor do ícone inativo
        }}
       >
-        <Tabs.Screen name="Aulas" 
+        <Tabs.Screen name="[Aulas]" 
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
