@@ -50,7 +50,7 @@ export default function Index(){
 
       console.log('----------');
 
-      router.push('/logado/Aulas');
+      router.push('/Escolas');
 
     } catch (error: any) {
 

@@ -19,6 +19,7 @@ export default function RootLayout() {
   return (
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="App"/>
+        <Stack.Screen name="Escolas"/>
       </Stack>
   );
 }
