@@ -21,17 +21,18 @@ export default function RootLayout(){
           title: 'Home',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
         }}/>
-        <Tabs.Screen name="Elemento"
-        options={{
-          title: 'Elemento',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="th-list" color={color} />,
-        }}
-        />
         <Tabs.Screen name="Checkin"
         options={{
           title: 'Check-in',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
         }}
+        />
+        <Tabs.Screen 
+            name="Sair"
+            options={{
+              title: 'Check-in',
+              tabBarIcon: ({ color }) => <FontAwesome size={28} name="sign-out" color={color} />,
+            }}
         />
       </Tabs>
     )

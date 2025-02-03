@@ -1,4 +1,5 @@
 import { useLinkTo } from '@react-navigation/native';
+import { router } from 'expo-router';
 import React from 'react';
 import { View, Text,  StyleSheet, TouchableOpacity} from 'react-native';
 
@@ -29,7 +30,7 @@ export default function CardEscola({name,
 
     function escolaEscolhida(){
         //Alert.alert('teste', 'teste');
-        linkTo('/AlunoInicio');
+        router.push('/logado/Aulas');
     }
 
     return (
