@@ -48,3 +48,14 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+
+/lectures => lista as aulas do dia
+
+
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdW5vQGZpYXAuY29tIiwic3ViIjozLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczODYzNjEyMCwiZXhwIjoxNzM4NzIyNTIwfQ.kB4l5N1N49cAuyH5AvfpXbe-AUO-MVcLy003T_DGpoWpM7VyMB_nlWIwMnkSfjNV-l7Nf3tENjeThnfwgvaOvfcTSdJHUq72gyu5SQWKvzLfMdGreQcryyIsjkALO1A6nPJznOxRSMlaTWJU1fl8Qr_9kq0zrjWXGiYvJi1I35qGC8B5RaeZwF47zGv8efxHHidyNfkZJUBER5iGweq8ZJ2QuVxPvtBn4jLrCQNLncxVwHESXG2TBaMJkmYZktULMqv615hgyD4gTShOimy2MDPKQcCT8V3OVOQNVEJErDO03IQu8hHW6XlW0WGY5mHkG8Bh7wvUxBWvqQlRNkV_qg => extrai o id do aluno pelo token para adicionar na requisição 
+
+{{serverJoao}}lectures/1/attendances?schoolId=1
+
+{{serverJoao}}lectures/1/attendances/3?schoolId=1
