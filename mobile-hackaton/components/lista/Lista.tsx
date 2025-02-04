@@ -15,15 +15,6 @@ return (
       <Text style={styles.author}>Autor: </Text>
       <Text style={styles.description} numberOfLines={5}></Text>
       <View style={styles.actions}>
-
-          <View style={styles.editDeleteContainer}>
-            <TouchableOpacity  style={styles.iconButton}>
-              <Icon name="edit" size={16} color="#FFF" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
-              <Icon name="trash" size={16} color="#FFF" />
-            </TouchableOpacity>
-          </View>
         <TouchableOpacity 
          style={styles.readMoreButton}>
           <Text style={styles.readMoreText}>Leia mais</Text>

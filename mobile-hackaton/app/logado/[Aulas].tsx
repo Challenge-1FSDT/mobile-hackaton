@@ -25,7 +25,6 @@ export default function Aulas(){
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Lista>
         </Lista>
-        <Text>dsfdsafdsafds</Text>
       </View>
     </>
   );

@@ -19,7 +19,7 @@ export default function ListaEscola() {
     try {
       const response = await listarEscola(token); // Chama a função que retorna as escolas
 
-      console.log('>>> ListaEscola.ListaEscola >>>' + JSON.stringify(response.data));
+      //console.log('>>> ListaEscola.ListaEscola >>>' + JSON.stringify(response.data));
 
       setEscolas(response.data); // Atualiza o estado com as escolas
     } catch (error) {
