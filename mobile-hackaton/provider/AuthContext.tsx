@@ -13,8 +13,6 @@ export default function AuthProvider({children}:any) : JSX.Element{
   const [token, setToken] = useState<string>("");
   const [refreshToken, setRefreshToken] = useState<string>("");
 
-  console.log(' >>> AuthProvider.token >>>'+token);
-
   return (
     <AuthContext.Provider value={{token, 
                                   setToken, 

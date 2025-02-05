@@ -8,8 +8,6 @@ export async function getLogin(email : string, password: string) {
   try {
     
       const response = await axios.post(`${ENDPOINTS.LOGIN}`, {email, password});
-      console.log('Tentativa de login');
-      console.log('response >> '+JSON.stringify(response));
 
       return response.data; // Retorna os dados da resposta
 

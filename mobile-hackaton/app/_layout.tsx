@@ -1,4 +1,5 @@
 import AuthProvider from '@/provider/AuthContext';
+import EscolaEscolhidaProvider from '@/provider/EscolaEscolhidaContext';
 import { Stack, Tabs } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -19,11 +20,13 @@ export default function RootLayout() {
 
   return (
 
-    <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="App"/>
-        <Stack.Screen name="Escolas"/>
-      </Stack>
-    </AuthProvider>
+      <AuthProvider>
+        <EscolaEscolhidaProvider>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="App"/>
+              <Stack.Screen name="Escolas"/>
+            </Stack>
+        </EscolaEscolhidaProvider>
+      </AuthProvider>
   );
 }

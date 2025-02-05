@@ -1,3 +1,4 @@
+import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { useLinkTo } from '@react-navigation/native';
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
@@ -15,14 +16,16 @@ interface CardEscolaProps {
   //updatedAt?: string; // Data de atualização (opcional)
 }
 
-export default function CardEscola({
+export default function CardEscola({idEscola,
                                     fantasyName,
                                     address,
                                     city
                                   }: CardEscolaProps) {  
 
+    const {setEscola} = useEscolaEscolhida();
+
     function escolaEscolhida(){
-        //Alert.alert('teste', 'teste');
+        setEscola(idEscola);
         router.push('/logado/Aulas');
     }
 

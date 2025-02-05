@@ -33,7 +33,7 @@ export default function RootLayout(){
           <Tabs.Screen 
               name="Sair"
               options={{
-                title: 'Check-in',
+                title: "Sair",
                 tabBarIcon: ({ color }) => <FontAwesome size={28} name="sign-out" color={color} />,
               }}
           />
