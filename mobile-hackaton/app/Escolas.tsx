@@ -13,13 +13,12 @@ export default function ListaEscola() {
   const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
   const {token} = useAuth();
+
   // Função para chamar listarEscola e atualizar o estado
   const fetchEscolas = async () => {
     
     try {
       const response = await listarEscola(token); // Chama a função que retorna as escolas
-
-      //console.log('>>> ListaEscola.ListaEscola >>>' + JSON.stringify(response.data));
 
       setEscolas(response.data); // Atualiza o estado com as escolas
     } catch (error) {
@@ -27,7 +26,6 @@ export default function ListaEscola() {
     } finally {
       setLoading(false); // Define loading como false após a requisição
     }
-
    
   };
 
@@ -37,9 +35,11 @@ export default function ListaEscola() {
   }, []);
 
   useEffect(() => {
+    
     if (!loading && escolas.length === 1) {
       router.push('/logado/Aulas'); // Redireciona caso exista apenas uma escola
     }
+
   }, [loading, escolas]); // A dependência deve ser o `loading` e `escolas`
 
   // Caso as escolas ainda estejam sendo carregadas
@@ -58,7 +58,13 @@ export default function ListaEscola() {
         <Text style={styles.title}>Suas matriculas</Text>
         {/* Aqui você pode listar as escolas, caso existam mais de uma */}
         {escolas.map((escola, index) => (
-          <CardEscola key={index} escola={escola} />
+            <View>
+              <CardEscola key={index} 
+                    fantasyName={escola?.fantasyName}
+                    address={escola?.address}
+                    city={escola?.city}
+              ></CardEscola>
+            </View>
         ))}
       </View>
     </>

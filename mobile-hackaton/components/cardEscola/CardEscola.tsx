@@ -1,29 +1,24 @@
 import { useLinkTo } from '@react-navigation/native';
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text,  StyleSheet, TouchableOpacity} from 'react-native';
 
 interface CardEscolaProps {
-  name: string; //Nome oficial da Empresa LTD.
+  //name: string; //Nome oficial da Empresa LTD.
   fantasyName: string; // Nome Fantasia da Escola
-  taxId: number; //(perguntar depois)
+  //taxId: number; //(perguntar depois)
   address: string; //Endereço
   city: string; //Cidade
-  state: string; //Estado
-  location: number[]; // Coordenadas [latitude, longitude]
-  createdAt?: string; // Data de criação (opcional)
-  updatedAt?: string; // Data de atualização (opcional)
+  //state: string; //Estado
+  //location: number[]; // Coordenadas [latitude, longitude]
+  //createdAt?: string; // Data de criação (opcional)
+  //updatedAt?: string; // Data de atualização (opcional)
 }
 
-export default function CardEscola({name,
+export default function CardEscola({
                                     fantasyName,
-                                    taxId,
                                     address,
-                                    city,
-                                    state,
-                                    location,
-                                    createdAt,
-                                    updatedAt
+                                    city
                                   }: CardEscolaProps) {  
 
     function escolaEscolhida(){
@@ -38,7 +33,7 @@ export default function CardEscola({name,
           <View style={styles.content}>
             <Text style={styles.title}>{fantasyName || 'Nome da Escola não informado'}</Text>
             <Text style={styles.description}>
-              {address || 'Endereço não localizado'}
+              {(`${address} - ${city}`) || 'Endereço não localizado'}
             </Text>
           </View>
         </View>
