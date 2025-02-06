@@ -12,12 +12,17 @@ import { useAuth } from '@/provider/AuthContext';
 export default function ListaEscola() {
   const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
-  const {token} = useAuth();
+  //const {token} = useAuth();
+  let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdW5vQGZpYXAuY29tIiwic3ViIjozLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczODgxMTEwMywiZXhwIjoxNzM4ODk3NTAzfQ.gFZOtVlaTSoIDSNlMWP11em3_08ydWNbOOPq9tSWIKMsZ8nZPoFkmjn6GmSLxg5jgYFvaEN4g6qVqXHBta0adc6BoDqG6zC6NqedizAYuffaNnyGH7Ug28quuEv6vwIxpyBdop0JBiMLTs2GR1J76Bm_EKALB8gqGXRRX2QKupEj1yjbohmoTtSDd4FRwD-Ney1zIPCTSADhhGlvid_TKU44xV6fDe1bwGG_LXPktR2GkmAv1g3G58zyvzUj5jdzQgl2UuFWCNixjFnFBE6VIE6E2LQwhGq7TRopfGRaqj8C96dLl_qmt_wbh-CAGzUpmAaijOQKFg5sxTTWtYi8oA';
+  //console.log(`>>> teste token: ${token}`);
 
   // Função para chamar listarEscola e atualizar o estado
-  const fetchEscolas = async () => {
+  const fetchEscolas = async (token: any) => {
+
+    //console.log('>>> fetchEscolas >>> '+token);
     
     try {
+
       const response = await listarEscola(token); // Chama a função que retorna as escolas
 
       setEscolas(response.data); // Atualiza o estado com as escolas
@@ -30,8 +35,8 @@ export default function ListaEscola() {
   };
 
   useEffect(() => {
-
-    fetchEscolas(); // Chama a função quando o componente for montado
+    console.log('>>> Escola >>> token' + token);
+    fetchEscolas(token); // Chama a função quando o componente for montado
   }, []);
 
   useEffect(() => {
@@ -45,9 +50,12 @@ export default function ListaEscola() {
   // Caso as escolas ainda estejam sendo carregadas
   if (loading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Carregando escolas...</Text>
-      </View>
+      <>
+        <CabecalhoPublico />
+        <View style={styles.container}>
+          <Text style={styles.title}>Carregando escolas...</Text>
+        </View>
+      </>
     );
   }
 
@@ -58,7 +66,7 @@ export default function ListaEscola() {
         <Text style={styles.title}>Suas matriculas</Text>
         {/* Aqui você pode listar as escolas, caso existam mais de uma */}
         {escolas.map((escola, index) => (
-            <View>
+       
               <CardEscola
                     key={escola.id || index}
                     idEscola={escola?.id}
@@ -66,7 +74,7 @@ export default function ListaEscola() {
                     address={escola?.address}
                     city={escola?.city}
               ></CardEscola>
-            </View>
+         
         ))}
       </View>
     </>

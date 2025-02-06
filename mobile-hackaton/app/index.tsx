@@ -40,25 +40,22 @@ export default function Index(){
 
     try {
 
-      let userData = await AsyncStorage.getItem('user');
-
       console.log('--------------------------------------------------');
 
       const response = await getLogin(formLogin.email, formLogin.password);
 
       console.log('--------------------------------------------------');
-      console.log('SENHOR DOS ANEIS');
-      console.log(userData);
-      console.log(response);
+      console.log(` >>> SENHOR DOS ANEIS >>> ${token} <<<`);
       setToken(response?.data?.accessToken);
-
-      console.log("Token antes de ser atualizado: ", token); // Isso ainda vai ser o antigo valor do token
-
+      console.log(`Hobbit >>> ${response?.data?.accessToken} <<<`);
+      console.log(` >>> SENHOR DOS ANEIS >>> ${token} <<<`);
       console.log('--------------------------------------------------');
 
       router.push('/Escolas');
 
     } catch (error: any) {
+
+      console.log('ERRO!!!!');
 
       if (error instanceof Error) {
         console.log('----------');

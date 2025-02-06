@@ -9,6 +9,7 @@ import { Text, StyleSheet, View } from 'react-native';
 
 export default function Aulas(){
 
+  const { token, setToken } = useAuth();
   const [aulasPossiveis, setAulasPossiveis] = useState([]);
   const params: { id: string } = useLocalSearchParams();
   const {escolaSelecionado} = useEscolaEscolhida();
@@ -16,21 +17,20 @@ export default function Aulas(){
   //---------------------------------
 
   const { id } = params;
-  const {token} = useAuth();
   const [loading, setLoading] = useState(true);
 
    //---------------------------------
 
-  const fetchListarAulas = async () => {
+  const fetchListarAulas = async (valorToken:string) => {
     
     try {
       
       console.log('*************************');
-      console.log('>>> listar aulas: '+token+'<<<');
-      console.log('>>> listar aulas: '+token+'<<<');
+      console.log('>>> listar aulas: '+valorToken+'<<<');
+      console.log('>>> listar aulas: '+valorToken+'<<<');
       console.log('*************************');
 
-      const response = await listarAulas(token,escolaSelecionado); // Chama a função que retorna as escolas
+      const response = await listarAulas(valorToken, escolaSelecionado); // Chama a função que retorna as escolas
 
       setAulasPossiveis(response.data); // Atualiza o estado com as escolas
     } catch (error) {
@@ -44,7 +44,9 @@ export default function Aulas(){
 
   //listar aulas
   useEffect(() => {
-    fetchListarAulas();
+
+    console.log('o que tem com o token que não está funcionando? '+token);
+    fetchListarAulas(token);
   }, []);
 
   useEffect(() => {
