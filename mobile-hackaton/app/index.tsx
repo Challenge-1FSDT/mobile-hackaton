@@ -8,8 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/provider/AuthContext';
 
 export default function Index(){
-
-  //const [userType, setUserType] = useState<"user" | "admin">("user");
   
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -56,9 +54,7 @@ export default function Index(){
 
       console.log("Token antes de ser atualizado: ", token); // Isso ainda vai ser o antigo valor do token
 
-  
       console.log('--------------------------------------------------');
-      console.log('----------');
 
       router.push('/Escolas');
 

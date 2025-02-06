@@ -7,5 +7,6 @@ export const ENDPOINTS = {
   REGISTER: `${BASE_URL}auth/register`,
   GET_USER: `${BASE_URL}user`,
   GET_LISTAR_ESCOLAS: `${BASE_URL}schools`,
+  GET_AULAS:  `${BASE_URL}lectures?schoolId=`,
   // Adicione outros endpoints conforme necessário
 };

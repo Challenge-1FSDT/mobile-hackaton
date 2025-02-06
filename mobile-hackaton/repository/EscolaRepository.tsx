@@ -22,3 +22,4 @@ export const listarEscola = async (token: any) => {
         throw new Error(error.response?.data?.message || error.message);
     }
 };
+
