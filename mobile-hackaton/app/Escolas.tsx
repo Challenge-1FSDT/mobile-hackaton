@@ -59,8 +59,8 @@ export default function ListaEscola() {
         {/* Aqui você pode listar as escolas, caso existam mais de uma */}
         {escolas.map((escola, index) => (
             <View>
-              <Text>{JSON.stringify(escola)}</Text>
-              <CardEscola key={index} 
+              <CardEscola
+                    key={escola.id || index}
                     idEscola={escola?.id}
                     fantasyName={escola?.fantasyName}
                     address={escola?.address}
