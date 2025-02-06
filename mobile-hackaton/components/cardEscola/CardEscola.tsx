@@ -1,3 +1,4 @@
+import { useAuth } from '@/provider/AuthContext';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { useLinkTo } from '@react-navigation/native';
 import { router } from 'expo-router';
@@ -23,8 +24,10 @@ export default function CardEscola({idEscola,
                                   }: CardEscolaProps) {  
 
     const {setEscola} = useEscolaEscolhida();
+    const {token} = useAuth();
 
     function escolaEscolhida(){
+        console.log(' >>> function escolaEscolhida >>>'+token);
         setEscola(idEscola);
         router.push('/logado/Aulas');
     }

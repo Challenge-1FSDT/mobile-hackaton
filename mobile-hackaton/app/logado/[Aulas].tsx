@@ -23,6 +23,8 @@ export default function Aulas(){
 
   const fetchListarAulas = async (valorToken:string) => {
     
+    console.log('um teste aleatorio: '+id);
+
     try {
       
       console.log('*************************');

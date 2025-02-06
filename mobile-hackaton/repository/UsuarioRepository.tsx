@@ -5,9 +5,13 @@ import { ENDPOINTS } from '@/constants/Endpoints';
 
 export async function getLogin(email : string, password: string) {
 
+  console.log(` >>>> getLogin(${email} - ${password}) <<<<`);
+  
   try {
     
       const response = await axios.post(`${ENDPOINTS.LOGIN}`, {email, password});
+
+      console.log(response.data);
 
       return response.data; // Retorna os dados da resposta
 
