@@ -5,8 +5,6 @@ import AuthProvider from '@/provider/AuthContext';
 
 export default function RootLayout(){
     return (
-
-      <AuthProvider>
         <Tabs
         screenOptions={{ headerShown: false,
           tabBarStyle: {
@@ -38,7 +36,6 @@ export default function RootLayout(){
               }}
           />
         </Tabs>
-      </AuthProvider>
     )
 }
 

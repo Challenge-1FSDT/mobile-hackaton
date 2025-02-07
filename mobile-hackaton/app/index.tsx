@@ -1,11 +1,10 @@
 import CabecalhoPublico from '@/components/cabecalho-publico/CabecalhoPublico';
-import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Text, TextInput,StyleSheet, TouchableOpacity, View } from 'react-native';
-import { router } from "expo-router";
-import { getLogin } from '@/repository/UsuarioRepository';
-import { Ionicons } from '@expo/vector-icons'; 
 import { useAuth } from '@/provider/AuthContext';
+import { getLogin } from '@/repository/UsuarioRepository';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from "expo-router";
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Index(){
   
@@ -34,45 +33,26 @@ export default function Index(){
 
   const handleLogin = async () => {
 
-    console.log('-------------------------');
-    console.log('' + formLogin.email +' - ' +formLogin.password + '');
-    console.log('-------------------------');
-
     try {
-
-      console.log('--------------------------------------------------');
 
       const response = await getLogin(formLogin.email, formLogin.password);
 
-      console.log('--------------------------------------------------');
-      console.log(` >>> SENHOR DOS ANEIS >>> ${token} <<<`);
+      if(!response?.data?.accessToken) return;
       setToken(response?.data?.accessToken);
-      console.log(`Hobbit >>> ${response?.data?.accessToken} <<<`);
-      console.log(` >>> SENHOR DOS ANEIS >>> ${token} <<<`);
-      console.log('--------------------------------------------------');
+
+      console.log()
 
       router.push('/Escolas');
 
     } catch (error: any) {
 
-      console.log('ERRO!!!!');
-
       if (error instanceof Error) {
-        console.log('----------');
-        console.log('-->Erro<--');
         console.log(error.message)
-        console.log('----------');
-
         setError(error.message);
       } else {
-        console.log('----------');
-        console.log('-->Erro<--');
-        console.log(error)
-        console.log('----------');
         setError("Ocorreu um erro na autenticação tente novamente");
       }
     }
-
 
   };
 

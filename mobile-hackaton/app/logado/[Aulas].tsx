@@ -5,11 +5,11 @@ import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarAulas } from '@/repository/AulasRepository';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function Aulas(){
 
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
   const [aulasPossiveis, setAulasPossiveis] = useState([]);
   const params: { id: string } = useLocalSearchParams();
   const {escolaSelecionado} = useEscolaEscolhida();
@@ -17,20 +17,16 @@ export default function Aulas(){
   //---------------------------------
 
   const { id } = params;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
    //---------------------------------
 
   const fetchListarAulas = async (valorToken:string) => {
     
-    console.log('um teste aleatorio: '+id);
+    setLoading(true);
 
     try {
-      
-      console.log('*************************');
-      console.log('>>> listar aulas: '+valorToken+'<<<');
-      console.log('>>> listar aulas: '+valorToken+'<<<');
-      console.log('*************************');
+
 
       const response = await listarAulas(valorToken, escolaSelecionado); // Chama a função que retorna as escolas
 
@@ -46,6 +42,8 @@ export default function Aulas(){
 
   //listar aulas
   useEffect(() => {
+
+    if(!token) return 
 
     console.log('o que tem com o token que não está funcionando? '+token);
     fetchListarAulas(token);
@@ -74,6 +72,8 @@ export default function Aulas(){
     <>
       <CabecalhoPrivado></CabecalhoPrivado>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Airam: {token}</Text>
+        <Button title="Learn More" onPress={()=>{console.log(`Airammmmm: ${token}`)}}/>
         <Lista>
         </Lista>
       </View>

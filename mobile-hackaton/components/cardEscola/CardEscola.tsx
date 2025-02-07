@@ -27,7 +27,6 @@ export default function CardEscola({idEscola,
     const {token} = useAuth();
 
     function escolaEscolhida(){
-        console.log(' >>> function escolaEscolhida >>>'+token);
         setEscola(idEscola);
         router.push('/logado/Aulas');
     }

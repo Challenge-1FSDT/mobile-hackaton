@@ -1,22 +1,20 @@
 import CabecalhoPublico from '@/components/cabecalho-publico/CabecalhoPublico';
-import React, { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Text, TextInput, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { router } from "expo-router";
-import { getLogin } from '@/repository/UsuarioRepository';
-import { Ionicons } from '@expo/vector-icons'; 
 import CardEscola from '@/components/cardEscola/CardEscola';
-import { listarEscola } from '@/repository/EscolaRepository';
 import { useAuth } from '@/provider/AuthContext';
+import { listarEscola } from '@/repository/EscolaRepository';
+import { router } from "expo-router";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function ListaEscola() {
   const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
-  //const {token} = useAuth();
-  let token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdW5vQGZpYXAuY29tIiwic3ViIjozLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczODgxMTEwMywiZXhwIjoxNzM4ODk3NTAzfQ.gFZOtVlaTSoIDSNlMWP11em3_08ydWNbOOPq9tSWIKMsZ8nZPoFkmjn6GmSLxg5jgYFvaEN4g6qVqXHBta0adc6BoDqG6zC6NqedizAYuffaNnyGH7Ug28quuEv6vwIxpyBdop0JBiMLTs2GR1J76Bm_EKALB8gqGXRRX2QKupEj1yjbohmoTtSDd4FRwD-Ney1zIPCTSADhhGlvid_TKU44xV6fDe1bwGG_LXPktR2GkmAv1g3G58zyvzUj5jdzQgl2UuFWCNixjFnFBE6VIE6E2LQwhGq7TRopfGRaqj8C96dLl_qmt_wbh-CAGzUpmAaijOQKFg5sxTTWtYi8oA';
+  const {token} = useAuth();
+
   //console.log(`>>> teste token: ${token}`);
 
   // Função para chamar listarEscola e atualizar o estado
+
   const fetchEscolas = async (token: any) => {
 
     //console.log('>>> fetchEscolas >>> '+token);
@@ -35,8 +33,12 @@ export default function ListaEscola() {
   };
 
   useEffect(() => {
-    console.log('>>> Escola >>> token' + token);
+
+    if(!token) return 
+
     fetchEscolas(token); // Chama a função quando o componente for montado
+
+      
   }, []);
 
   useEffect(() => {
