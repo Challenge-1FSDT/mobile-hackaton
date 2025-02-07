@@ -22,11 +22,12 @@ export default function RootLayout(){
             title: 'Home',
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
           }}/>
-          <Tabs.Screen name="Checkin"
-          options={{
-            title: 'Check-in',
-            tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
-          }}
+          <Tabs.Screen name="Check-in"
+            options={{
+              title: 'Check-in',
+              tabBarStyle: { display: 'none' },
+              tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
+            }}
           />
           <Tabs.Screen 
               name="Sair"

@@ -13,7 +13,6 @@ export default function Checkin(){
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Checkin tela</Text>
 
-        
         <Link href="/checkout/Checkout"  style={{ backgroundColor: '#A020F0'}}>Teste</Link>
 
       </View>
