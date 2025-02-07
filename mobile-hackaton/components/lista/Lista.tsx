@@ -5,17 +5,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome'; // react-native-vector-icons/FontAwesome
 
 
-export default function Lista(){
+export default function CardAulas({value}:any){
+
+function teste(){
+  router.push('/logado/Checkin')
+}
 
 return (
     <View style={styles.card}>
       <View style={styles.header}>
         <Text style={styles.title}></Text>
       </View>
-      <Text style={styles.author}>Autor: </Text>
-      <Text style={styles.description} numberOfLines={5}></Text>
+      <Text style={styles.author}>Nome da Displina: {value.name}</Text>
+      <Text style={styles.description}>Hora de inicio: { new Date(value.startAt).toLocaleDateString() }</Text> 
       <View style={styles.actions}>
-        <TouchableOpacity 
+        <TouchableOpacity onPress={teste}
          style={styles.readMoreButton}>
           <Text style={styles.readMoreText}>Leia mais</Text>
         </TouchableOpacity>

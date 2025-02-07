@@ -1,16 +1,16 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
-import Lista from '@/components/lista/Lista';
+import CardAulas from '@/components/lista/Lista';
 import { useAuth } from '@/provider/AuthContext';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarAulas } from '@/repository/AulasRepository';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function Aulas(){
 
   const { token } = useAuth();
-  const [aulasPossiveis, setAulasPossiveis] = useState([]);
+  const [aulasPossiveis, setAulasPossiveis] = useState<any[]>([]);
   const params: { id: string } = useLocalSearchParams();
   const {escolaSelecionado} = useEscolaEscolhida();
 
@@ -26,7 +26,6 @@ export default function Aulas(){
     setLoading(true);
 
     try {
-
 
       const response = await listarAulas(valorToken, escolaSelecionado); // Chama a função que retorna as escolas
 
@@ -44,8 +43,6 @@ export default function Aulas(){
   useEffect(() => {
 
     if(!token) return 
-
-    console.log('o que tem com o token que não está funcionando? '+token);
     fetchListarAulas(token);
   }, []);
 
@@ -71,12 +68,17 @@ export default function Aulas(){
   return (
     <>
       <CabecalhoPrivado></CabecalhoPrivado>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Airam: {token}</Text>
-        <Button title="Learn More" onPress={()=>{console.log(`Airammmmm: ${token}`)}}/>
-        <Lista>
-        </Lista>
-      </View>
+      <ScrollView>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          
+            {aulasPossiveis.map((aula, index)=>(
+                <CardAulas key={index}
+                value={aula}
+                >
+                </CardAulas>
+            ))}
+        </View>
+      </ScrollView>
     </>
   );
 };
