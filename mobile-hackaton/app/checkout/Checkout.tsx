@@ -5,7 +5,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 
 export default function Checkout(){
 
-  const [timeLeft, setTimeLeft] = useState(1); // 45 minutos em segundos
+  const [timeLeft, setTimeLeft] = useState(10); // 45 minutos em segundos
   const [isTimeUp, setIsTimeUp] = useState(false); // Estado para controlar a visibilidade do botão
 
 

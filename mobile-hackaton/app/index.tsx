@@ -40,8 +40,6 @@ export default function Index(){
       if(!response?.data?.accessToken) return;
       setToken(response?.data?.accessToken);
 
-      console.log()
-
       router.push('/Escolas');
 
     } catch (error: any) {
@@ -55,7 +53,6 @@ export default function Index(){
     }
 
   };
-
 
   return (
     <>

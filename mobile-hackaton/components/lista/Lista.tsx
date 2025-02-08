@@ -11,13 +11,31 @@ function teste(){
   router.push('/logado/Checkin')
 }
 
+
+
+
 return (
     <View style={styles.card}>
       <View style={styles.header}>
         <Text style={styles.title}></Text>
       </View>
       <Text style={styles.author}>Nome da Displina: {value.name}</Text>
-      <Text style={styles.description}>Hora de inicio: { new Date(value.startAt).toLocaleDateString() }</Text> 
+      <Text style={styles.description}>Hora de inicio: { new Date(value.startAt).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }) + ' - ' + new Date(value.startAt).toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }) }</Text> 
+      <Text style={styles.description}>Hora de fim: { new Date(value.startAt).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }) + ' - ' + new Date(value.endAt).toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }) }</Text> 
       <View style={styles.actions}>
         <TouchableOpacity onPress={teste}
          style={styles.readMoreButton}>

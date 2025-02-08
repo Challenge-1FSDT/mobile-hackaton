@@ -25,7 +25,6 @@ export default function RootLayout(){
           <Tabs.Screen name="Check-in"
             options={{
               title: 'Check-in',
-              tabBarStyle: { display: 'none' },
               tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
             }}
           />

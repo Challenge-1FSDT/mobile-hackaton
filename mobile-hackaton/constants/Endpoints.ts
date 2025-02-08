@@ -1,5 +1,5 @@
 // Base URL da API
-export const BASE_URL = 'https://707c8f11ec6c.ngrok.app/';
+export const BASE_URL = 'https://api.learn-on.app/';
 
 // Endpoints específicos
 export const ENDPOINTS = {

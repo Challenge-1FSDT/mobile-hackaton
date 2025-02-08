@@ -26,7 +26,7 @@ return (
           </View>
         <TouchableOpacity 
          style={styles.readMoreButton}>
-          <Text style={styles.readMoreText}>Leia mais</Text>
+          <Text style={styles.readMoreText}>Check in</Text>
         </TouchableOpacity>
       </View>
     </View>
