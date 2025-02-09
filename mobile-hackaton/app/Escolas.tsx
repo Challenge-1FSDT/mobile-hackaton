@@ -47,7 +47,6 @@ export default function ListaEscola() {
     
     if (!loading && escolas.length === 1) {
       setEscola(escolas[0].id);
-      console.log(escolas[0].id);
       router.push('/logado/Aulas'); // Redireciona caso exista apenas uma escola
     }
 
