@@ -1,15 +1,17 @@
 import CabecalhoPublico from '@/components/cabecalho-publico/CabecalhoPublico';
 import CardEscola from '@/components/cardEscola/CardEscola';
 import { useAuth } from '@/provider/AuthContext';
+import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarEscola } from '@/repository/EscolaRepository';
 import { router } from "expo-router";
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
 export default function ListaEscola() {
   const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
   const {token} = useAuth();
+  const {setEscola} = useEscolaEscolhida();
 
   //console.log(`>>> teste token: ${token}`);
 
@@ -44,6 +46,8 @@ export default function ListaEscola() {
   useEffect(() => {
     
     if (!loading && escolas.length === 1) {
+      setEscola(escolas[0].id);
+      console.log(escolas[0].id);
       router.push('/logado/Aulas'); // Redireciona caso exista apenas uma escola
     }
 
