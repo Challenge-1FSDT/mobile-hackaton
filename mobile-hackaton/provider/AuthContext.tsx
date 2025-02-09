@@ -15,8 +15,9 @@ export default function AuthProvider({children}:any) : JSX.Element{
   const [refreshToken, setRefreshToken] = useState<string>("");
 
   useEffect(()=>{
-    console.log('>>> AuthProvider.effect >>>',token)
-  },[token])
+    console.log('>>> AuthProvider.effect >>>',token);
+    console.log('>>> AuthProvider.effect >>>',refreshToken);
+  },[token, refreshToken])
 
   return (
     <AuthContext.Provider value={{token, 

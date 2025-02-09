@@ -11,12 +11,11 @@ export default function Aulas(){
 
   const { token } = useAuth();
   const [aulasPossiveis, setAulasPossiveis] = useState<any[]>([]);
-  const params: { id: string } = useLocalSearchParams();
+  //const params: { id: string } = useLocalSearchParams();
   const {escolaSelecionado} = useEscolaEscolhida();
 
   //---------------------------------
 
-  //const { id } = params;
   const [loading, setLoading] = useState(false);
 
    //---------------------------------
@@ -27,9 +26,17 @@ export default function Aulas(){
 
     try {
 
+      console.log('-----------------------------------------------');
+      console.log(' >>> Valor Token >>> ', valorToken);
+      console.log(' >>> Escola Selecionada >>> ', escolaSelecionado);
+      console.log('-----------------------------------------------');
+
       const response = await listarAulas(valorToken, escolaSelecionado); // Chama a função que retorna as escolas
 
       setAulasPossiveis(response.data); // Atualiza o estado com as escolas
+
+
+
     } catch (error) {
       console.error("Erro ao aulas:", error); // Handle erro
     } finally {

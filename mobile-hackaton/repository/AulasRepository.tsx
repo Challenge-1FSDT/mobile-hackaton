@@ -22,8 +22,6 @@ const getCurrentDateRange = () => {
 
 export const listarAulas = async (token: string, idEscola: any) => {
 
-  
-
     const url = ENDPOINTS.GET_AULAS+idEscola;
 
     try {
@@ -36,14 +34,16 @@ export const listarAulas = async (token: string, idEscola: any) => {
             params: getCurrentDateRange()
         });
         
-        return response.data;/*({"data":
+        console.log(response.data);
+
+        return /*response.data;*/({"data":
             [
                 {"id":1,"name":"Português","startAt":"2025-02-07T00:30:00.000Z","endAt":"2025-01-27T00:00:00.000Z"},
                 {"id":2,"name":"Matemática","startAt":"2025-02-03T00:30:00.000Z","endAt":"2025-02-04T00:00:00.000Z"},
                 {"id":3,"name":"Geografia","startAt":"2025-02-06T00:30:04.055Z","endAt":"2025-02-06T00:33:04.055Z"},
                 {"id":4,"name":"Biologia","startAt":"2025-02-06T00:30:04.055Z","endAt":"2025-02-06T00:33:04.055Z"}
             ]
-        })*/
+        })
    
     } catch (error: any) {
         console.error("Erro ao buscar aulas:", error.response?.data || error.message);
