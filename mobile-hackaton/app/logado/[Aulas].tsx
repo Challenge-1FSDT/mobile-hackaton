@@ -58,9 +58,12 @@ export default function Aulas(){
    // Caso as escolas ainda estejam sendo carregadas
   if (loading) {
     return (
-      <View style={styles.container}>
-        <Text>Carregando Aulas disponíveis...</Text>
-      </View>
+      <>
+        <CabecalhoPrivado></CabecalhoPrivado>
+        <View style={styles.container}>
+          <Text>Carregando Aulas disponíveis...</Text>
+        </View>
+      </>
     );
   }
 
