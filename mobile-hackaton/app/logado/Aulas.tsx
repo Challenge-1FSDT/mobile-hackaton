@@ -5,7 +5,7 @@ import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarAulas } from '@/repository/AulasRepository';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 
 export default function Aulas(){
 
@@ -16,7 +16,7 @@ export default function Aulas(){
 
   //---------------------------------
 
-  const { id } = params;
+  //const { id } = params;
   const [loading, setLoading] = useState(false);
 
    //---------------------------------
@@ -71,17 +71,20 @@ export default function Aulas(){
   return (
     <>
       <CabecalhoPrivado></CabecalhoPrivado>
-      <ScrollView>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          
-            {aulasPossiveis.map((aula, index)=>(
-                <CardAulas key={index}
-                value={aula}
-                >
-                </CardAulas>
-            ))}
-        </View>
-      </ScrollView>
+      <View style={styles.container}>
+        <Button title="Teste de acesso a disciplina" onPress={()=>{router.navigate('/logado/Checkin'); }}></Button>
+        <ScrollView>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            
+              {aulasPossiveis.map((aula, index)=>(
+                  <CardAulas key={index}
+                  value={aula}
+                  >
+                  </CardAulas>
+              ))}
+          </View>
+        </ScrollView>
+      </View>
     </>
   );
 };

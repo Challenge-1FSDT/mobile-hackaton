@@ -17,18 +17,11 @@ export default function LogadoLayout(){
           tabBarInactiveTintColor: "#A9A9A9", // Cor do ícone inativo
         }}
         >
-          <Tabs.Screen name="[Aulas]" 
+          <Tabs.Screen name="Aulas" 
           options={{
             title: 'Home',
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
           }}/>
-          <Tabs.Screen name="Checkin"
-            options={{
-              href: null,
-              title: 'Check-in',
-              tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
-            }}
-          />
           <Tabs.Screen 
               name="Sair"
               options={{
@@ -36,7 +29,18 @@ export default function LogadoLayout(){
                 tabBarIcon: ({ color }) => <FontAwesome size={28} name="sign-out" color={color} />,
               }}
           />
+
+          {/* Rotas Ocultas */}
+          <Tabs.Screen name="Checkin"
+            options={{
+              href: null,
+              title: 'Check-in',
+              tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
+            }}
+          />
         </Tabs>
+
+
     )
 }
 
