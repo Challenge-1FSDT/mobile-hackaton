@@ -18,7 +18,7 @@ export default function Index(){
   //Formulário de login
   const [formLogin, setFormLogin] = useState({
     email: "aluno@fiap.com",
-    password: "Fiap2024+",
+    password: "31121999",
   });
 
   // Função para lidar com mudanças nos campos de formulário

@@ -5,7 +5,6 @@
   },
   "build": {
     "development": {
-      "platform": "android", 
       "developmentClient": true,
       "distribution": "internal"
     },
@@ -13,9 +12,7 @@
       "distribution": "internal"
     },
     "production": {
-      "platform": "android", 
-      "distribution": "store",
-      "releaseChannel": "prod"
+      "autoIncrement": true
     }
   },
   "submit": {
