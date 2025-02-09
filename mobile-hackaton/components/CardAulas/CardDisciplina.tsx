@@ -1,43 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import { router, useLocalSearchParams } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/FontAwesome'; // react-native-vector-icons/FontAwesome
+import { router } from 'expo-router';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 
 export default function CardAulas({value}:any){
 
-function teste(){
+function CardAulasInicializando(){
   router.push('/logado/Checkin')
 }
-
-
-
 
 return (
     <View style={styles.card}>
       <View style={styles.header}>
         <Text style={styles.title}></Text>
       </View>
-      <Text style={styles.author}>Nome da Displina: {value.name}</Text>
-      <Text style={styles.description}>Hora de inicio: { new Date(value.startAt).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      }) + ' - ' + new Date(value.startAt).toLocaleTimeString('pt-BR', {
+      <Text style={styles.author}>Nome da Disciplina: {value.name}</Text>
+      <Text style={styles.description}>Início: { new Date(value.startAt).toLocaleTimeString('pt-BR', {
         hour: '2-digit',
         minute: '2-digit',
       }) }</Text> 
-      <Text style={styles.description}>Hora de fim: { new Date(value.startAt).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      }) + ' - ' + new Date(value.endAt).toLocaleTimeString('pt-BR', {
+      <Text style={styles.description}>Fim: { new Date(value.endAt).toLocaleTimeString('pt-BR', {
         hour: '2-digit',
         minute: '2-digit',
       }) }</Text> 
       <View style={styles.actions}>
-        <TouchableOpacity onPress={teste}
+        <TouchableOpacity onPress={CardAulasInicializando}
          style={styles.readMoreButton}>
           <Text style={styles.readMoreText}>Leia mais</Text>
         </TouchableOpacity>
