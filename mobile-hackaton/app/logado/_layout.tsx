@@ -33,9 +33,7 @@ export default function LogadoLayout(){
           {/* Rotas Ocultas */}
           <Tabs.Screen name="Checkin"
             options={{
-              href: null,
-              title: 'Check-in',
-              tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
+              href: null
             }}
           />
         </Tabs>
