@@ -3,7 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { StyleSheet } from 'react-native';
 import AuthProvider from '@/provider/AuthContext';
 
-export default function RootLayout(){
+export default function LogadoLayout(){
     return (
         <Tabs
         screenOptions={{ headerShown: false,
@@ -22,8 +22,9 @@ export default function RootLayout(){
             title: 'Home',
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
           }}/>
-          <Tabs.Screen name="Check-in"
+          <Tabs.Screen name="Checkin"
             options={{
+              href: null,
               title: 'Check-in',
               tabBarIcon: ({ color }) => <FontAwesome size={28} name="hourglass-o" color={color} />,
             }}
