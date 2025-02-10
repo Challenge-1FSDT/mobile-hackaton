@@ -1,15 +1,15 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
+import { useAula } from '@/provider/AulaContext';
+import { useAuth } from '@/provider/AuthContext';
+import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
+import { salvarCheckinOuCheckOut } from '@/repository/CheckinRepository';
+import { calculandoDiferencaDeDataInicio } from '@/utilitarios/CalculoDeDataUtil';
+import { decodeBase64Token } from '@/utilitarios/ConverterJWTEmObjetoUtil';
+import * as Location from 'expo-location';
 import { router } from 'expo-router';
+import { getDistance } from 'geolib';
 import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import * as Location from 'expo-location';
-import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
-import { getDistance } from 'geolib';
-import { useAula } from '@/provider/AulaContext';
-import calculandoDiferencaDeData from '@/utilitarios/CalculoDeDataUtil';
-import { salvarCheckinOuCheckOut } from '@/repository/CheckinRepository';
-import { useAuth } from '@/provider/AuthContext';
-import { decodeBase64Token } from '@/utilitarios/ConverterJWTEmObjetoUtil';
 
 export default function Checkin(){
 
@@ -72,24 +72,25 @@ export default function Checkin(){
 
     console.log('verificando data: ', dataInicial);
 
-    const diferencaMinutos = calculandoDiferencaDeData(dataInicial);
+    const diferencaMinutos = calculandoDiferencaDeDataInicio(dataInicial);
 
+    //-------------------------------------------------------------
     // Verificar se deu check-in até 10 minutos antes
-    /*
     if (diferencaMinutos < -10 || diferencaMinutos > 10) {
       Alert.alert('Atraso', 'Check-in só pode ser feito 10 minutos antes ou depois da aula começar, por favor, comunique o professor ao final da aula.');
       return;
     }
 
+    //-------------------------------------
+    //Diferença de distância
     if(distance>5){
       Alert.alert('Aviso', 'Sua distância em relação a escola é superior a 5km! Por favor, comunique a um professor.');
       return;
     }
-    */
-
+    
     //-------------------------------------------------------------
     //captura o objeto do token para realizar o checkout
-    /*
+    
     const usuarioObj = decodeBase64Token(token);
 
     try{
@@ -98,7 +99,7 @@ export default function Checkin(){
       Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-in, por favor, comunique o professor');
       return;
     }
-    */
+    
     router.navigate('/logado/Checkout');
 
   }
