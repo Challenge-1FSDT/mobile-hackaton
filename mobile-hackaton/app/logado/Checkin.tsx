@@ -184,10 +184,6 @@ export default function Checkin(){
               <Text style={styles.infoValue}>{aulaSelecionada.sala || 'Não informado'}</Text>
             </View>
 
-            <View style={styles.infoRow}>
-              <Text style={styles.infoLabel}>Alunos:</Text>
-              <Text style={styles.infoValue}>{aulaSelecionada.alunos || 'Não informado'}</Text>
-            </View>
           </View>
 
           <Text style={styles.infoText}>
