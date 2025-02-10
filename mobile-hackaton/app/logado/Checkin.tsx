@@ -21,14 +21,32 @@ export default function Checkin(){
           <View>
 
               <Text style={styles.title}>Disciplina</Text>
+              
+              <View>
+
+                  <View>
+                    <Text>Início</Text>
+                    <Text>{}</Text>
+                  </View>
+
+                  <View>
+                    <Text>Fim</Text>
+                  </View>
+
+                  <View>
+                    <Text>Sala</Text>
+                  </View>
+
+              </View>
 
               <Text style={styles.inputGroup}>É permitido realizar o check-in da aula até 10 minutos com antecedência e será conferido pelo professor. </Text>
               
               <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={registrarCheckinAula}>
-                  <Text style={styles.buttonText} disabled={false}>Check-in</Text>
+                  <Text style={styles.buttonText} disabled={false}>Realizar Check-in</Text>
                 </TouchableOpacity>
               </View>
+              
           </View>
       </View>
     </>
