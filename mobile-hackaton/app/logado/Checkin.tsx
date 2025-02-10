@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { getDistance } from 'geolib';
 import { useAula } from '@/provider/AulaContext';
+import calculandoDiferencaDeData from '@/utilitarios/CalculoDeDataUtil';
 
 export default function Checkin(){
 
@@ -62,14 +63,24 @@ export default function Checkin(){
   //Na linha 17, precisa ser programaticamente, para disparar o calculo da distancia e o tempo
   function registrarCheckinAula(){
 
+    let dataInicial = aulaSelecionada?.startAt;
+
+    console.log('verificando data: ', dataInicial);
+
+    const diferencaMinutos = calculandoDiferencaDeData(dataInicial);
+
+    // Verificar se deu check-in até 10 minutos antes
+    if (diferencaMinutos < -10 || diferencaMinutos > 10) {
+      Alert.alert('Atraso', 'Check-in só pode ser feito 10 minutos antes ou depois da aula começar, por favor, comunique o professor ao final da aula.');
+      return;
+    }
+
     if(distance>5){
       Alert.alert('Aviso', 'Sua distância em relação a escola é superior a 5km! Por favor, comunique a um professor.');
       return;
     }
 
-    let dataInicial = aulaSelecionada?.startAt;
 
-    
 
     router.push('/checkout/Checkout');
 
@@ -104,52 +115,6 @@ export default function Checkin(){
       </>
     );
   }
-
-  /*
-  return (
-    <>
-      <CabecalhoPrivado></CabecalhoPrivado>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <View>
-
-              <Text style={styles.title}>{aulaSelecionada.name}</Text>
-              
-              <View>
-
-                  <View>
-                    <Text>Início</Text>
-                    <Text>{new Date(aulaSelecionada.startAt)
-                                  .toLocaleTimeString('pt-BR', {
-                                                                  hour: '2-digit',
-                                                                  minute: '2-digit',
-                                                                }) 
-                            || 'Não foi localizado o horário inicial'}</Text>
-                  </View>
-
-                  <View>
-                    <Text>Fim </Text>
-                    <Text>{new Date(aulaSelecionada.endAt)
-                                  .toLocaleTimeString('pt-BR', {
-                                                                  hour: '2-digit',
-                                                                  minute: '2-digit',
-                                                                }) 
-                            || 'Não foi localizado o horário inicial'}</Text>
-                  </View>
-
-              </View>
-
-              <Text style={styles.inputGroup}>É permitido realizar o check-in da aula até 10 minutos com antecedência e será conferido pelo professor. </Text>
-
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={registrarCheckinAula}>
-                  <Text style={styles.buttonText} disabled={false}>Realizar Check-in</Text>
-                </TouchableOpacity>
-              </View>
-
-          </View>
-      </View>
-    </>
-  );*/
 
   return (
     <>
