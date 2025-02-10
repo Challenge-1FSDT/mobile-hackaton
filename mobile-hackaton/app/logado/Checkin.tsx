@@ -9,6 +9,7 @@ import { useAula } from '@/provider/AulaContext';
 import calculandoDiferencaDeData from '@/utilitarios/CalculoDeDataUtil';
 import { salvarCheckinOuCheckOut } from '@/repository/CheckinRepository';
 import { useAuth } from '@/provider/AuthContext';
+import { decodeBase64Token } from '@/utilitarios/ConverterJWTEmObjetoUtil';
 
 export default function Checkin(){
 
@@ -85,14 +86,20 @@ export default function Checkin(){
       return;
     }
     */
+
+    //-------------------------------------------------------------
+    //captura o objeto do token para realizar o checkout
+    /*
+    const usuarioObj = decodeBase64Token(token);
+
     try{
-      await salvarCheckinOuCheckOut(token, 1, escolaSelecionado);
+      await salvarCheckinOuCheckOut(token, usuarioObj.sub, escolaSelecionado);
     }catch(erro){
       Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-in, por favor, comunique o professor');
       return;
     }
-      
-    router.push('/checkout/Checkout');
+    */
+    router.navigate('/logado/Checkout');
 
   }
 
