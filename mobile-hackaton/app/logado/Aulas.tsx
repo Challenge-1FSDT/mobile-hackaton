@@ -76,7 +76,6 @@ export default function Aulas(){
     <>
       <CabecalhoPrivado></CabecalhoPrivado>
       <View style={styles.container}>
-        <Button title="Teste de acesso a disciplina" onPress={()=>{router.navigate('/logado/Checkin'); }}></Button>
         <ScrollView>
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             
