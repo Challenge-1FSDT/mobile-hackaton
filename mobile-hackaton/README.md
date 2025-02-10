@@ -59,3 +59,28 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdW5vQGZpYXAuY29tIiwic3ViIjo
 {{serverJoao}}lectures/1/attendances?schoolId=1
 
 {{serverJoao}}lectures/1/attendances/3?schoolId=1
+
+
+
+-----------------------------------------------
+
+
+{{requisitos}} 
+
+[ ] - Adicionar um icone de slash
+
+[x] - Precisa adicionar a logica que zera o token do usuario apos clicar no botão de sair;
+
+* Adicionar no inicio do aplicativo uma validacao que verifica o usuario já possui um token e um schoolId, se sim, já redireciona para tela home do logado;
+
+[x] - Adicionar a opcao para que assim que clicar na disciplina seja exibido a interface do usuario a descrição da disciplina/aula (Data de inicio, fim, descrição da aula);
+
+[] - O botão de checkin da disciplina só pode aparecer ativo quando o usuário estiver dentro do tempo mínimo exibido para disciplina.
+
+[] - Na tela de Foco total, ele haver um botão que abre o forum do aplicativo e permite somente retornar para esta tela de focus e para mais nada.
+
+[] - Ao clicar em finalizar, deve registrar o check-out;
+
+[] - Descobrir porque o aplicativo não gerou apk;
+
+

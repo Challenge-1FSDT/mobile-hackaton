@@ -1,5 +1,5 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
-import CardAulas from '@/components/lista/Lista';
+import CardAulas from '@/components/CardAulas/CardDisciplina';
 import { useAuth } from '@/provider/AuthContext';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarAulas } from '@/repository/AulasRepository';

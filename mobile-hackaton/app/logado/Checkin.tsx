@@ -1,17 +1,106 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
 import { router } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as Location from 'expo-location';
+import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
+import { getDistance } from 'geolib';
 
 export default function Checkin(){
+
+  const [location, setLocation] = useState<null | Location.LocationObject>(null);
+  const [distance, setDistance] = useState<number>(0);
+
+  const {escolaLocalizacao} = useEscolaEscolhida();
+  const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
+  const [permissaoNegada, setPermissaoNegada] = useState(false); // Estado para indicar se está carregando
+
+  //-------------------------------
+
+  const getLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== 'granted') {
+      alert('Permissão negada para acessar a localização!');
+      setLoading(false);
+      setPermissaoNegada(true);
+      return;
+    }
+
+    const localizacaoAtual = await Location.getCurrentPositionAsync({});
+    
+    console.log('')
+
+    const referencePoint = {
+      latitude: escolaLocalizacao[0],
+      longitude: escolaLocalizacao[1],
+    };
+
+    //---------------------------------------------
+    //captura a localizacao atual
+
+    console.log('Localizacao atual: ',{ latitude: localizacaoAtual.coords.latitude, longitude: localizacaoAtual.coords.longitude });
+    console.log('Localizacoa da escola: ',referencePoint);
+
+    //---------------------------------------------
+
+    //Verificar a distancia
+
+    const distance = getDistance(
+      { latitude: localizacaoAtual.coords.latitude, longitude: localizacaoAtual.coords.longitude },
+      referencePoint
+    );
+
+    setDistance(Number((distance/ 1000).toFixed(2)));
+
+    console.log('Distancia do aluno: ',distance);
+
+    //---------------------------------------------
+
+    setLoading(false);
+  };
 
   //Na linha 17, precisa ser programaticamente, para disparar o calculo da distancia e o tempo
   function registrarCheckinAula(){
 
 
+    if(distance>5){
+      Alert.alert('Aviso', 'Sua distância em relação a escola é superior a 5km! Por favor, comunique a um professor.');
+      return;
+    }
 
     router.push('/checkout/Checkout');
 
+  }
+
+  useEffect(() => {
+
+    getLocation(); // Chama a função quando o componente for montado
+
+  }, []);
+
+
+  // Caso as escolas ainda estejam sendo carregadas
+  if (loading) {
+    return (
+      <>
+        <CabecalhoPrivado />
+        <View style={styles.container}>
+          <Text style={styles.title}>Carregando...</Text>
+        </View>
+      </>
+    );
+  }
+
+  if(permissaoNegada){
+    return (
+      <>
+        <CabecalhoPrivado />
+        <View style={styles.container}>
+          <Text style={styles.title}>Permissão de localizacao negada, por favor saia do aplicativo e tente novamente, autorizando o uso da captura do localização</Text>
+        </View>
+      </>
+    );
   }
 
   return (
@@ -40,13 +129,13 @@ export default function Checkin(){
               </View>
 
               <Text style={styles.inputGroup}>É permitido realizar o check-in da aula até 10 minutos com antecedência e será conferido pelo professor. </Text>
-              
+
               <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={registrarCheckinAula}>
                   <Text style={styles.buttonText} disabled={false}>Realizar Check-in</Text>
                 </TouchableOpacity>
               </View>
-              
+
           </View>
       </View>
     </>
