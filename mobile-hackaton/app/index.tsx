@@ -38,6 +38,7 @@ export default function Index(){
       const response = await getLogin(formLogin.email, formLogin.password);
 
       if(!response?.data?.accessToken) return;
+      
       setToken(response?.data?.accessToken);
 
       router.push('/Escolas');

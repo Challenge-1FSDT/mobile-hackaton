@@ -5,21 +5,16 @@ import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarEscola } from '@/repository/EscolaRepository';
 import { router } from "expo-router";
 import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function ListaEscola() {
   const [escolas, setEscolas] = useState([]); // Estado para armazenar as escolas
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
   const {token} = useAuth();
-  const {setEscola} = useEscolaEscolhida();
-
-  //console.log(`>>> teste token: ${token}`);
+  const {setEscola, setEscolaLocalizacao} = useEscolaEscolhida();
 
   // Função para chamar listarEscola e atualizar o estado
-
   const fetchEscolas = async (token: any) => {
-
-    //console.log('>>> fetchEscolas >>> '+token);
     
     try {
 
@@ -47,6 +42,7 @@ export default function ListaEscola() {
     
     if (!loading && escolas.length === 1) {
       setEscola(escolas[0].id);
+      setEscolaLocalizacao(escolas[0].location);
       router.push('/logado/Aulas'); // Redireciona caso exista apenas uma escola
     }
 
@@ -78,6 +74,7 @@ export default function ListaEscola() {
                     fantasyName={escola?.fantasyName}
                     address={escola?.address}
                     city={escola?.city}
+                    location={escola?.location}
               ></CardEscola>
          
         ))}

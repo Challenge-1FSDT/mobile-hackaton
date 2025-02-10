@@ -3,6 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 interface IEscolaEscolhida{
   escolaSelecionado: string,
   setEscola: (token: string) => void
+  escolaLocalizacao: any[],
+  setEscolaLocalizacao: (localizacao : number[]) => void
+  objetoEscola: Object,
+  setObjetoEscola: (objeto: Object) => void
 }
 
 const EscolaEscolhidaContext = createContext<IEscolaEscolhida | null>(null);
@@ -10,13 +14,22 @@ const EscolaEscolhidaContext = createContext<IEscolaEscolhida | null>(null);
 export default function EscolaEscolhidaProvider({children}:any) : JSX.Element{
 
   const [escolaSelecionado, setEscola] = useState<string>("");
+  const [escolaLocalizacao, setEscolaLocalizacao] = useState<number[]>([]);
+  const [objetoEscola, setObjetoEscola] = useState<Object>({});
 
   useEffect(()=>{
-    console.log('>>> AuthProvider.effect >>>',escolaSelecionado)
-  },[escolaSelecionado]);
+    console.log('>>> AuthProvider.effect >>>',escolaSelecionado);
+    console.log('>>> AuthProvider.effect >>>',escolaLocalizacao);
+  },[escolaSelecionado, escolaLocalizacao]);
 
   return (
-    <EscolaEscolhidaContext.Provider value={{escolaSelecionado, setEscola}}>
+    <EscolaEscolhidaContext.Provider value={{escolaSelecionado, 
+                                             setEscola,
+                                             escolaLocalizacao,
+                                             setEscolaLocalizacao,
+                                             objetoEscola,
+                                             setObjetoEscola
+                                             }}>
         {children}
     </EscolaEscolhidaContext.Provider>
   );

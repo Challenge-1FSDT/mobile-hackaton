@@ -14,6 +14,7 @@ export const listarEscola = async (token: any) => {
             }
         });
 
+        console.log(response.data);
         return response.data; // Retorna os dados da resposta
 
     } catch (error: any) {

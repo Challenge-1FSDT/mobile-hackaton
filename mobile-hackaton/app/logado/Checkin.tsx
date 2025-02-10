@@ -1,15 +1,17 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Button, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Checkin(){
 
   //Na linha 17, precisa ser programaticamente, para disparar o calculo da distancia e o tempo
   function registrarCheckinAula(){
-    
+
+
 
     router.push('/checkout/Checkout');
+
   }
 
   return (
@@ -23,7 +25,7 @@ export default function Checkin(){
               <Text style={styles.inputGroup}>É permitido realizar o check-in da aula até 10 minutos com antecedência e será conferido pelo professor. </Text>
               
               <TouchableOpacity style={styles.button} onPress={registrarCheckinAula}>
-                <Text style={styles.buttonText}>Check-in</Text>
+                <Text style={styles.buttonText} disabled={false}>Check-in</Text>
               </TouchableOpacity>
 
           </View>

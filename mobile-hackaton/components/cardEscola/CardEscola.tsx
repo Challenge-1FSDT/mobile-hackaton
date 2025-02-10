@@ -12,7 +12,7 @@ interface CardEscolaProps {
   address: string; //Endereço
   city: string; //Cidade
   //state: string; //Estado
-  //location: number[]; // Coordenadas [latitude, longitude]
+  location: number[]; // Coordenadas [latitude, longitude]
   //createdAt?: string; // Data de criação (opcional)
   //updatedAt?: string; // Data de atualização (opcional)
 }
@@ -20,14 +20,16 @@ interface CardEscolaProps {
 export default function CardEscola({idEscola,
                                     fantasyName,
                                     address,
-                                    city
+                                    city,
+                                    location
                                   }: CardEscolaProps) {  
 
-    const {setEscola} = useEscolaEscolhida();
-    const {token} = useAuth();
+    const {setEscola, setEscolaLocalizacao} = useEscolaEscolhida();
 
     function escolaEscolhida(){
         setEscola(idEscola);
+        setEscolaLocalizacao(location);
+        console.log('>>> localizacao da escola',location);
         router.push('/logado/Aulas');
     }
 
