@@ -1,5 +1,6 @@
 import CabecalhoPrivado from '@/components/cabecalho-privado/CabecalhoPrivado';
 import CardAulas from '@/components/CardAulas/CardDisciplina';
+import { useAula } from '@/provider/AulaContext';
 import { useAuth } from '@/provider/AuthContext';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { listarAulas } from '@/repository/AulasRepository';
@@ -12,7 +13,7 @@ export default function Aulas(){
   const { token } = useAuth();
   const [aulasPossiveis, setAulasPossiveis] = useState<any[]>([]);
   const {escolaSelecionado} = useEscolaEscolhida();
-
+ 
   //---------------------------------
 
   const [loading, setLoading] = useState(false);
@@ -49,15 +50,6 @@ export default function Aulas(){
     if(!token) return 
     fetchListarAulas(token);
   }, []);
-
-  useEffect(() => {
-    
-    if (!loading && aulasPossiveis.length === 1) {
-      router.push('/logado/Aulas'); // Redireciona caso exista apenas uma escola
-    }
-
-  }, [loading, aulasPossiveis]); // A dependência deve ser o `loading` e `escolas`
-
 
    // Caso as escolas ainda estejam sendo carregadas
   if (loading) {

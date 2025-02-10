@@ -5,15 +5,16 @@ import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Location from 'expo-location';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { getDistance } from 'geolib';
+import { useAula } from '@/provider/AulaContext';
 
 export default function Checkin(){
 
-  const [location, setLocation] = useState<null | Location.LocationObject>(null);
   const [distance, setDistance] = useState<number>(0);
 
   const {escolaLocalizacao} = useEscolaEscolhida();
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
   const [permissaoNegada, setPermissaoNegada] = useState(false); // Estado para indicar se está carregando
+  const {aulaSelecionada}  = useAula();
 
   //-------------------------------
 
@@ -28,8 +29,6 @@ export default function Checkin(){
     }
 
     const localizacaoAtual = await Location.getCurrentPositionAsync({});
-    
-    console.log('')
 
     const referencePoint = {
       latitude: escolaLocalizacao[0],
@@ -63,11 +62,14 @@ export default function Checkin(){
   //Na linha 17, precisa ser programaticamente, para disparar o calculo da distancia e o tempo
   function registrarCheckinAula(){
 
-
     if(distance>5){
       Alert.alert('Aviso', 'Sua distância em relação a escola é superior a 5km! Por favor, comunique a um professor.');
       return;
     }
+
+    let dataInicial = aulaSelecionada?.startAt;
+
+    
 
     router.push('/checkout/Checkout');
 
@@ -103,27 +105,35 @@ export default function Checkin(){
     );
   }
 
+  /*
   return (
     <>
       <CabecalhoPrivado></CabecalhoPrivado>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <View>
 
-              <Text style={styles.title}>Disciplina</Text>
+              <Text style={styles.title}>{aulaSelecionada.name}</Text>
               
               <View>
 
                   <View>
                     <Text>Início</Text>
-                    <Text>{}</Text>
+                    <Text>{new Date(aulaSelecionada.startAt)
+                                  .toLocaleTimeString('pt-BR', {
+                                                                  hour: '2-digit',
+                                                                  minute: '2-digit',
+                                                                }) 
+                            || 'Não foi localizado o horário inicial'}</Text>
                   </View>
 
                   <View>
-                    <Text>Fim</Text>
-                  </View>
-
-                  <View>
-                    <Text>Sala</Text>
+                    <Text>Fim </Text>
+                    <Text>{new Date(aulaSelecionada.endAt)
+                                  .toLocaleTimeString('pt-BR', {
+                                                                  hour: '2-digit',
+                                                                  minute: '2-digit',
+                                                                }) 
+                            || 'Não foi localizado o horário inicial'}</Text>
                   </View>
 
               </View>
@@ -139,73 +149,131 @@ export default function Checkin(){
           </View>
       </View>
     </>
+  );*/
+
+  return (
+    <>
+      <CabecalhoPrivado />
+      <View style={styles.mainContent}>
+        <View>
+          <Text style={styles.sectionTitle}>{aulaSelecionada.name}</Text>
+
+          <View style={styles.infoContainer}>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Início:</Text>
+              <Text style={styles.infoValue}>
+                {new Date(aulaSelecionada.startAt).toLocaleTimeString('pt-BR', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }) || 'Não foi localizado o horário inicial'}
+              </Text>
+            </View>
+
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Fim:</Text>
+              <Text style={styles.infoValue}>
+                {new Date(aulaSelecionada.endAt).toLocaleTimeString('pt-BR', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }) || 'Não foi localizado o horário final'}
+              </Text>
+            </View>
+
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Sala:</Text>
+              <Text style={styles.infoValue}>{aulaSelecionada.sala || 'Não informado'}</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Alunos:</Text>
+              <Text style={styles.infoValue}>{aulaSelecionada.alunos || 'Não informado'}</Text>
+            </View>
+          </View>
+
+          <Text style={styles.infoText}>
+            É permitido realizar o check-in da aula até 10 minutos com antecedência e será conferido pelo professor.
+          </Text>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={registrarCheckinAula}>
+              <Text style={styles.buttonText}>Realizar Check-in</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#E9D8FD",
-    justifyContent: "space-between",
+    backgroundColor: '#E9D8FD',
+    justifyContent: 'center',
+  },
+  mainContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#E9D8FD',
+    padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#6B46C1",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#6B46C1',
     marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#4C51BF',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  infoContainer: {
+    marginBottom: 20,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+  },
+  infoLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#4C51BF',
+  },
+  infoValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#4A5568',
+  },
+  infoText: {
+    fontSize: 16,
+    color: '#4A5568',
+    marginBottom: 30,
+    textAlign: 'center',
   },
   buttonContainer: {
-    justifyContent: 'center', // Centraliza verticalmente
-    alignItems: 'center', // Centraliza horizontalmente
-  },
-  inputGroup: {
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 16,
-    color: "#6B46C1",
-    marginBottom: 8,
-    fontWeight: "bold",
-  },
-  input: {
-    height: 50,
-    backgroundColor: "#FAF5FF",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#D6BCFA",
-    paddingHorizontal: 10,
-    fontSize: 16,
-    color: "#4C51BF",
-    width: '100%',
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  eyeIcon: {
-    marginLeft: -40, // Ajusta o posicionamento do ícone
-    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
-    backgroundColor: "#6B46C1", // Roxo
-    padding: 15, // Padding interno para ajustar o texto
-    borderRadius: 60, // Torna o botão redondo
-    alignItems: "center",
-    justifyContent: "center", // Centraliza o texto no círculo
-    width: 120, // Largura do círculo
-    height: 120, // Altura do círculo (mesma da largura para formar o círculo)
+    backgroundColor: '#6B46C1',
+    padding: 15,
+    borderRadius: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 120,
+    height: 120,
   },
   buttonText: {
-    color: "#FFFFFF",
-    fontSize: 16, // Tamanho ajustado para caber no círculo
-    fontWeight: "bold",
-  },
-  errorText: {
-    color: "red",
-    textAlign: "center",
-    marginBottom: 16,
-    fontWeight: "bold",
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

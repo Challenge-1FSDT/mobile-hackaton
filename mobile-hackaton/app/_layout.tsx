@@ -1,3 +1,4 @@
+import AulaProvider from '@/provider/AulaContext';
 import AuthProvider from '@/provider/AuthContext';
 import EscolaEscolhidaProvider from '@/provider/EscolaEscolhidaContext';
 import { Stack } from 'expo-router';
@@ -22,10 +23,12 @@ export default function RootLayout() {
 
       <AuthProvider>
         <EscolaEscolhidaProvider>
+          <AulaProvider>
             <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen name="App"/>
               <Stack.Screen name="Escolas"/>
             </Stack>
+          </AulaProvider>
         </EscolaEscolhidaProvider>
       </AuthProvider>
   );

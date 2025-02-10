@@ -1,3 +1,4 @@
+import { useAula } from '@/provider/AulaContext';
 import { router } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -5,8 +6,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CardAulas({value}:any){
 
-function CardAulasInicializando(){
-  router.push('/logado/Checkin')
+  const {aulaSelecionada, setAulaSelecionada} = useAula();
+
+function CardAulasInicializando(aula:any){
+  console.log('--------------------------------');
+  console.log(' >>> CardAulasInicializando <<< ');
+  setAulaSelecionada(aula);
+  console.log('Objeto da aula: ',JSON.stringify(aula));
+  router.push('/logado/Checkin');
+  console.log('--------------------------------');
 }
 
 return (
@@ -24,7 +32,7 @@ return (
         minute: '2-digit',
       }) }</Text> 
       <View style={styles.actions}>
-        <TouchableOpacity onPress={CardAulasInicializando}
+        <TouchableOpacity onPress={()=>{CardAulasInicializando(value)}}
          style={styles.readMoreButton}>
           <Text style={styles.readMoreText}>Leia mais</Text>
         </TouchableOpacity>
