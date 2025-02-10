@@ -13,7 +13,7 @@ const EscolaEscolhidaContext = createContext<IEscolaEscolhida | null>(null);
 
 export default function EscolaEscolhidaProvider({children}:any) : JSX.Element{
 
-  const [escolaSelecionado, setEscola] = useState<string>("");
+  const [escolaSelecionado, setEscola] = useState<number>(0);
   const [escolaLocalizacao, setEscolaLocalizacao] = useState<number[]>([]);
   const [objetoEscola, setObjetoEscola] = useState<Object>({});
 

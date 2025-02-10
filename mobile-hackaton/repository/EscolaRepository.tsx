@@ -1,10 +1,9 @@
-import axios from './../node_modules/axios';
 import { ENDPOINTS } from './../constants/Endpoints';
-import { useAuth } from '@/provider/AuthContext';
+import axios from './../node_modules/axios';
 
 export const listarEscola = async (token: any) => {
+    
     const url = ENDPOINTS.GET_LISTAR_ESCOLAS;
-
 
     try {
         const response = await axios.get(url, {
@@ -14,7 +13,7 @@ export const listarEscola = async (token: any) => {
             }
         });
 
-        console.log(response.data);
+        //console.log('>>> listarEscola >>>',response.data);
         return response.data; // Retorna os dados da resposta
 
     } catch (error: any) {

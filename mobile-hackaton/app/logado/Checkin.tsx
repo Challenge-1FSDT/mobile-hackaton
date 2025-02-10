@@ -7,12 +7,15 @@ import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { getDistance } from 'geolib';
 import { useAula } from '@/provider/AulaContext';
 import calculandoDiferencaDeData from '@/utilitarios/CalculoDeDataUtil';
+import { salvarCheckinOuCheckOut } from '@/repository/CheckinRepository';
+import { useAuth } from '@/provider/AuthContext';
 
 export default function Checkin(){
 
   const [distance, setDistance] = useState<number>(0);
 
-  const {escolaLocalizacao} = useEscolaEscolhida();
+  const {token} = useAuth();
+  const {escolaLocalizacao, escolaSelecionado} = useEscolaEscolhida();
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
   const [permissaoNegada, setPermissaoNegada] = useState(false); // Estado para indicar se está carregando
   const {aulaSelecionada}  = useAula();
@@ -60,8 +63,9 @@ export default function Checkin(){
     setLoading(false);
   };
 
-  //Na linha 17, precisa ser programaticamente, para disparar o calculo da distancia e o tempo
-  function registrarCheckinAula(){
+  //-----------------------------------------------------------------------------
+
+  async function registrarCheckinAula(){
 
     let dataInicial = aulaSelecionada?.startAt;
 
@@ -70,6 +74,7 @@ export default function Checkin(){
     const diferencaMinutos = calculandoDiferencaDeData(dataInicial);
 
     // Verificar se deu check-in até 10 minutos antes
+    /*
     if (diferencaMinutos < -10 || diferencaMinutos > 10) {
       Alert.alert('Atraso', 'Check-in só pode ser feito 10 minutos antes ou depois da aula começar, por favor, comunique o professor ao final da aula.');
       return;
@@ -79,9 +84,14 @@ export default function Checkin(){
       Alert.alert('Aviso', 'Sua distância em relação a escola é superior a 5km! Por favor, comunique a um professor.');
       return;
     }
-
-
-
+    */
+    try{
+      await salvarCheckinOuCheckOut(token, 1, escolaSelecionado);
+    }catch(erro){
+      Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-in, por favor, comunique o professor');
+      return;
+    }
+      
     router.push('/checkout/Checkout');
 
   }

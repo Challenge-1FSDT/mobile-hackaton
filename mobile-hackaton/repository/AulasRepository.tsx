@@ -34,7 +34,7 @@ export const listarAulas = async (token: string, idEscola: any) => {
             params: getCurrentDateRange()
         });
         
-        console.log(response.data);
+        console.log('>>> listarAulas >>> ',response.data);
 
         return /*response.data;*/({"data":
             [
