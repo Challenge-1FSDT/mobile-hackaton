@@ -76,10 +76,12 @@ export default function Checkin(){
 
     //-------------------------------------------------------------
     // Verificar se deu check-in até 10 minutos antes
+    /*
     if (diferencaMinutos < -10 || diferencaMinutos > 10) {
       Alert.alert('Atraso', 'Check-in só pode ser feito 10 minutos antes ou depois da aula começar, por favor, comunique o professor ao final da aula.');
       return;
     }
+      */
 
     //-------------------------------------
     //Diferença de distância
@@ -94,8 +96,9 @@ export default function Checkin(){
     const usuarioObj = decodeBase64Token(token);
 
     try{
-      await salvarCheckinOuCheckOut(token, usuarioObj.sub, escolaSelecionado);
+      await salvarCheckinOuCheckOut(token, usuarioObj.sub, aulaSelecionada?.id);
     }catch(erro){
+      console.error(' >> Checkin >> Teste: ',erro);
       Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-in, por favor, comunique o professor');
       return;
     }
@@ -162,10 +165,11 @@ export default function Checkin(){
               </Text>
             </View>
 
+              {/*
             <View style={styles.infoRow}>
               <Text style={styles.infoLabel}>Sala:</Text>
               <Text style={styles.infoValue}>{aulaSelecionada.sala || 'Não informado'}</Text>
-            </View>
+            </View>*/}
 
           </View>
 
