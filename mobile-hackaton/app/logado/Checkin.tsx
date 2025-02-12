@@ -96,7 +96,7 @@ export default function Checkin(){
     
     //const usuarioObj = decodeBase64Token(token);
 
-
+    /*
     try{
 
       console.log(" >>>> JSON >>>>"+JSON.stringify(escolaSelecionado));
@@ -105,7 +105,7 @@ export default function Checkin(){
       console.error(' >> Checkin >> Teste: ',erro);
       Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-in, por favor, comunique o professor');
       return;
-    }
+    }*/
     
     router.navigate('/logado/Checkout');
 

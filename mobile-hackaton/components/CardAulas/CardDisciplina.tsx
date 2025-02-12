@@ -1,5 +1,6 @@
 import { useAula } from '@/provider/AulaContext';
 import { router } from 'expo-router';
+import moment from 'moment';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -23,14 +24,8 @@ return (
         <Text style={styles.title}></Text>
       </View>
       <Text style={styles.author}>Nome da Disciplina: {value.name}</Text>
-      <Text style={styles.description}>Início: { new Date(value.startAt).toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }) }</Text> 
-      <Text style={styles.description}>Fim: { new Date(value.endAt).toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }) }</Text> 
+      <Text style={styles.description}>Início: { moment(value.startAt).utc().format('HH:mm') }</Text> 
+      <Text style={styles.description}>Fim: { moment(value.endAt).utc().format('HH:mm') }</Text> 
       <View style={styles.actions}>
         <TouchableOpacity onPress={()=>{CardAulasInicializando(value)}}
          style={styles.readMoreButton}>
