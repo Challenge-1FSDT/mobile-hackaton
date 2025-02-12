@@ -23,7 +23,7 @@ const getCurrentDateRange = () => {
     const now = moment();
 
     // Data de início do dia (em hora local)
-    const startAt = now.clone().subtract(1, 'days').startOf('day');
+    const startAt = now.clone().startOf('day');
 
     // Data de final do dia (em hora local)
     const endAt = now.clone().endOf('day');
