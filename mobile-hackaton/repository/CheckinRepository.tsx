@@ -1,11 +1,12 @@
 import { getCheckinEndpoint } from './../constants/Endpoints';
 import axios from './../node_modules/axios';
 
-export const salvarCheckinOuCheckOut = async (token: any, idAluno: any, idAula: any) => {
+export const salvarCheckinOuCheckOut = async (token: any, idAula: any, idSchool: any) => {
 
-    const url = getCheckinEndpoint(idAluno, idAula);
+    const url = getCheckinEndpoint(idAula, idSchool);
 
     console.log(' >>> salvarCheckinOuCheckOut.token >>> '+url);
+    console.log(' >>> token >>> '+token);
 
     try {
         const response = await axios.post(url, {}, {

@@ -11,13 +11,13 @@ export default function Index(){
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  let {token, setToken} = useAuth();
+  let {setToken} = useAuth();
 
   //------------------------------
 
   //Formulário de login
   const [formLogin, setFormLogin] = useState({
-    email: "aluno@fiap.com",
+    email: "aluno2r@fiap.com",
     password: "31121999",
   });
 

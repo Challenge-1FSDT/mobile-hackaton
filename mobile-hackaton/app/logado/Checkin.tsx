@@ -17,9 +17,10 @@ export default function Checkin(){
 
   const {token} = useAuth();
   const {escolaLocalizacao, escolaSelecionado} = useEscolaEscolhida();
+
   const [loading, setLoading] = useState(true); // Estado para indicar se está carregando
   const [permissaoNegada, setPermissaoNegada] = useState(false); // Estado para indicar se está carregando
-  const {aulaSelecionada}  = useAula();
+  const {aulaSelecionada} = useAula();
 
   //-------------------------------
 
@@ -93,10 +94,13 @@ export default function Checkin(){
     //-------------------------------------------------------------
     //captura o objeto do token para realizar o checkout
     
-    const usuarioObj = decodeBase64Token(token);
+    //const usuarioObj = decodeBase64Token(token);
+
 
     try{
-      await salvarCheckinOuCheckOut(token, usuarioObj.sub, aulaSelecionada?.id);
+
+      console.log(" >>>> JSON >>>>"+JSON.stringify(escolaSelecionado));
+      await salvarCheckinOuCheckOut(token, aulaSelecionada?.id, escolaSelecionado);
     }catch(erro){
       console.error(' >> Checkin >> Teste: ',erro);
       Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-in, por favor, comunique o professor');
