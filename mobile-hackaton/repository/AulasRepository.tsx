@@ -1,25 +1,9 @@
 import axios from './../node_modules/axios';
 import { ENDPOINTS } from './../constants/Endpoints';
-import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import moment from 'moment';
 
 const getCurrentDateRange = () => {
 
-    /*
-    const now = new Date();
-    console.log(now);
-    // Data de início do dia
-    const startAt = new Date(now);
-    startAt.setHours(0, 0, 0, 0);
-
-    // Data de final do dia
-    const endAt = new Date(now);
-    endAt.setHours(23, 59, 0, 0);
-
-    return {
-        startAt: startAt.toISOString(),
-        endAt: endAt.toISOString()
-    };*/
     const now = moment();
 
     // Data de início do dia (em hora local)
