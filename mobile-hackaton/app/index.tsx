@@ -17,7 +17,7 @@ export default function Index(){
 
   //Formulário de login
   const [formLogin, setFormLogin] = useState({
-    email: "aluno2r@fiap.com",
+    email: "aluno2@fiap.com",
     password: "31121999",
   });
 
