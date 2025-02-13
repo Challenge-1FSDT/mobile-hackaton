@@ -39,7 +39,7 @@ export const listarAulas = async (token: string, idEscola: any) => {
 
         return /*response.data;*/({"data":
             [
-                {"id":1,"name":"Português","startAt":"2025-02-12T20:45:00.000Z","endAt":"2025-02-12T21:00:00.000Z"},
+                {"id":1,"name":"Português","startAt":"2025-02-12T20:45:00.000Z","endAt":"2025-02-12T23:28:00.000Z"},
                 /*{"id":2,"name":"Matemática","startAt":"2025-02-12T21:30:00.000Z","endAt":"2025-02-12T22:00:00.000Z"},*/
                 /*{"id":3,"name":"Geografia","startAt":"2025-02-12T23:30:04.055Z","endAt":"2025-02-12T23:33:04.055Z"}*/
             ]

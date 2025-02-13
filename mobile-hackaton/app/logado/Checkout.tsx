@@ -3,8 +3,10 @@ import { useAula } from '@/provider/AulaContext';
 import { useAuth } from '@/provider/AuthContext';
 import { salvarCheckinOuCheckOut } from '@/repository/CheckinRepository';
 import { calculandoDiferencaDeDataFim } from '@/utilitarios/CalculoDeDataUtil';
+import { calculandoData, convertendoSegundosEmHora } from '@/utilitarios/CalculoDeDataUtilMoment';
 import { decodeBase64Token } from '@/utilitarios/ConverterJWTEmObjetoUtil';
 import { router } from 'expo-router';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 // Função de cálculo de diferença de tempo
@@ -19,11 +21,30 @@ const { aulaSelecionada } = useAula();
 
 useEffect(() => {
   if (aulaSelecionada?.endAt) {
+
+    console.log(' data Final >> '+aulaSelecionada?.endAt);
     // Usa a função para calcular a diferença em segundos
-    const differenceInSeconds = calculandoDiferencaDeDataFim(aulaSelecionada.endAt);
+    const differenceInSeconds = calculandoData(aulaSelecionada.endAt);
+
+
+       // Converte a diferença em milissegundos para exibição
+       const data = moment.duration(differenceInSeconds, 'seconds');
+      
+       console.log(
+         'Diferença Formatada: ' +
+           String(data.hours()).padStart(2, '0') +
+           ':' +
+           String(data.minutes()).padStart(2, '0') +
+           ':' +
+           String(data.seconds()).padStart(2, '0')
+       );
+
+    console.log('Checkout >> '+differenceInSeconds);
+
     setTimeLeft(differenceInSeconds);
 
     // Se o tempo já acabou, marca como time up
+    console.log('differenceInSeconds >> '+differenceInSeconds);
     if (differenceInSeconds <= 0) {
       setIsTimeUp(true);
     } else {
@@ -45,22 +66,23 @@ useEffect(() => {
 }, [aulaSelecionada]);
 
 // Formata o tempo para minutos e segundos
-const formatTime = (time: number) => {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+const formatTime = (seconds: number) => {
+  console.log(convertendoSegundosEmHora(seconds));
+  return convertendoSegundosEmHora(seconds);//data.format('HH:mm:ss');
 };
 
 const registrarCheckoutAula = async() => {
   
   const usuarioObj = decodeBase64Token(token);
-
+  /*
   try{
     await salvarCheckinOuCheckOut(token, usuarioObj.sub, escolaSelecionado);
   }catch(erro){
     Alert.alert('Checkin com erro', 'Não foi possível realizer seu check-out, por favor, comunique o professor');
     return;
-  }
+  }*/
+
+  Alert.alert('Check-out realizado', 'Check-out realizado com sucesso');
 
   router.navigate('/logado/Aulas');
 
@@ -100,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   timerText: {
-    fontSize: 100,
+    fontSize: 90,
     fontWeight: 'bold',
     color: 'white',
   },

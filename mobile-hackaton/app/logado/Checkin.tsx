@@ -4,10 +4,12 @@ import { useAuth } from '@/provider/AuthContext';
 import { useEscolaEscolhida } from '@/provider/EscolaEscolhidaContext';
 import { salvarCheckinOuCheckOut } from '@/repository/CheckinRepository';
 import { calculandoDiferencaDeDataInicio } from '@/utilitarios/CalculoDeDataUtil';
+import calculandoData from '@/utilitarios/CalculoDeDataUtilMoment';
 import { decodeBase64Token } from '@/utilitarios/ConverterJWTEmObjetoUtil';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { getDistance } from 'geolib';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -73,7 +75,7 @@ export default function Checkin(){
 
     console.log('verificando data: ', dataInicial);
 
-    const diferencaMinutos = calculandoDiferencaDeDataInicio(dataInicial);
+    //const diferencaMinutos = calculandoDiferencaDeDataInicio(dataInicial);
 
     //-------------------------------------------------------------
     // Verificar se deu check-in até 10 minutos antes
@@ -114,7 +116,7 @@ export default function Checkin(){
   useEffect(() => {
 
     getLocation(); // Chama a função quando o componente for montado
-
+    //calculandoData(aulaSelecionada.endAt);
   }, []);
 
 
@@ -152,20 +154,14 @@ export default function Checkin(){
             <View style={styles.infoRow}>
               <Text style={styles.infoLabel}>Início:</Text>
               <Text style={styles.infoValue}>
-                {new Date(aulaSelecionada.startAt).toLocaleTimeString('pt-BR', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                }) || 'Não foi localizado o horário inicial'}
+                {moment(aulaSelecionada.startAt).utc().format('HH:mm') || 'Não foi localizado o horário inicial'}
               </Text>
             </View>
 
             <View style={styles.infoRow}>
               <Text style={styles.infoLabel}>Fim:</Text>
               <Text style={styles.infoValue}>
-                {new Date(aulaSelecionada.endAt).toLocaleTimeString('pt-BR', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                }) || 'Não foi localizado o horário final'}
+                {moment(aulaSelecionada.endAt).utc().format('HH:mm') || 'Não foi localizado o horário final'}
               </Text>
             </View>
 
